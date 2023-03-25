@@ -1,3 +1,24 @@
+# Proyecto Inicial Sumski-Tiradani
+### Idea a implementar
+Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde los usuarios podrán explorar una tienda donde las camisetas estarán separadas por distintas categorías (como puede ser paises, ligas, clubes) y tendrán la posibilidad de comprarlas y personalizarlas modificando su nombre y número a estampar.
+
+## Información a utilizar
+
+### Diagrama ER
+![Diagrama entidad-relacion inicial](https://i.imgur.com/6FW8jF4.png)
+
+## Respecto al proyecto PHP - Laravel
+### Entidades actualizables
+### Reportes 
+### Entidades obtenibles por API
+### Entidades modificables por API
+
+
+## Respecto al proyecto en JS - React
+### Informacion que verá el cliente
+### Acciones disponibles para el cliente
+
+
 ## Pasos
 
 - clonar el repo https://github.com/iaw-2023/laravel-template y mantener como owner la organización de la materia.
