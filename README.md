@@ -1,42 +1,72 @@
 # Proyecto Inicial Sumski-Tiradani
+
 ### Idea a implementar
+
 Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde los usuarios podrán explorar una tienda donde las camisetas estarán separadas por distintas categorías (como puede ser paises, ligas, clubes) y tendrán la posibilidad de comprarlas y personalizarlas modificando su nombre y número a estampar.
 
 ## Información a utilizar
 
 ### Diagrama ER
-![Diagrama entidad-relacion inicial](https://i.imgur.com/6FW8jF4.png)
+
+![Diagrama entidad-relacion inicial](https://i.imgur.com/oY4LPlC.png)
+
+-   **Camiseta**
+
+    -   El producto a vender, caracterizado por un _identificador_, un _precio_ y los _talles disponibles_.
+    -   Pertenece a **una o varias** _categorías_.
+
+-   **Categoría**
+
+    -   Entidades que organizan camisetas, tienen un _identificador_ y un _nombre_.
+
+-   **Pedido**
+
+    -   Un pedido está asociado a **una** camiseta en específico.
+    -   Pertenece a **una** compra.
+    -   Tiene como atributos un _talle elegido_ y una posible personalización con un _número y nombre a estampar_.
+
+-   **Compra**
+
+    -   Una compra está compuesta por **varios** pedidos de camisetas.
+    -   Tiene asociado **un** cliente que realizó la compra.
+    -   Posee información sobre _medio de pago_, el _valor total_ de la compra y la _dirección de entrega_.
+
+-   **Cliente**
+    -   Un cliente se identifica por un _email_, a este están asociados **todos** sus pedidos de compra.
 
 ## Respecto al proyecto PHP - Laravel
+
 ### Entidades actualizables
-### Reportes 
+
+### Reportes
+
 ### Entidades obtenibles por API
+
 ### Entidades modificables por API
 
-
 ## Respecto al proyecto en JS - React
-### Informacion que verá el cliente
-### Acciones disponibles para el cliente
 
+### Informacion que verá el cliente
+
+### Acciones disponibles para el cliente
 
 ## Pasos
 
-- clonar el repo https://github.com/iaw-2023/laravel-template y mantener como owner la organización de la materia.
+-   clonar el repo https://github.com/iaw-2023/laravel-template y mantener como owner la organización de la materia.
+
 ## parados en el directorio del repositorio recientemente clonado, ejecutar:
 
-- `composer install`
-- `cp .env.example .env`
-- `php artisan key:generate`
-- `php artisan serve`
+-   `composer install`
+-   `cp .env.example .env`
+-   `php artisan key:generate`
+-   `php artisan serve`
 
 Con el último comando, pueden acceder a http://127.0.0.1:8000/ y ver la cáscara de la aplicación Laravel
 
 ### Requisitos
 
-- tener [composer](https://getcomposer.org/) instalado
-- tener [php](https://www.php.net/) instalado
-
-
+-   tener [composer](https://getcomposer.org/) instalado
+-   tener [php](https://www.php.net/) instalado
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
@@ -51,13 +81,13 @@ Con el último comando, pueden acceder a http://127.0.0.1:8000/ y ver la cáscar
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   [Simple, fast routing engine](https://laravel.com/docs/routing).
+-   [Powerful dependency injection container](https://laravel.com/docs/container).
+-   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+-   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+-   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+-   [Robust background job processing](https://laravel.com/docs/queues).
+-   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
@@ -75,19 +105,19 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+-   **[Vehikl](https://vehikl.com/)**
+-   **[Tighten Co.](https://tighten.co)**
+-   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+-   **[64 Robots](https://64robots.com)**
+-   **[Cubet Techno Labs](https://cubettech.com)**
+-   **[Cyber-Duck](https://cyber-duck.co.uk)**
+-   **[Many](https://www.many.co.uk)**
+-   **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+-   **[DevSquad](https://devsquad.com)**
+-   **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+-   **[OP.GG](https://op.gg)**
+-   **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+-   **[Lendio](https://lendio.com)**
 
 ## Contributing
 
