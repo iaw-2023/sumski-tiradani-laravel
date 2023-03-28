@@ -8,7 +8,7 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
 
 ### Diagrama ER
 
-![Diagrama entidad-relacion inicial](https://i.imgur.com/oY4LPlC.png)
+![Diagrama entidad-relacion inicial](https://i.imgur.com/owH6qjB.png)
 
 -   **Camiseta**
 
@@ -29,10 +29,11 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
 
     -   Una compra está compuesta por **varios** pedidos de camisetas.
     -   Tiene asociado **un** cliente que realizó la compra.
-    -   Posee información sobre _medio de pago_, el _valor total_ de la compra y la _dirección de entrega_.
+    -   Posee información sobre _medio de pago_, el _valor total_ de la compra, la _dirección de entrega_, el _estado_ de la misma y las _fecha_ y _hora_ de        realizacion de la compra. 
 
 -   **Cliente**
-    -   Un cliente se identifica por un _email_, a este están asociados **todos** sus pedidos de compra.
+    -   Un cliente se identifica por un _email_, _nombre_ y _apellido_. 
+    -   A este están asociados **todos** sus pedidos de compra.
 
 ## Respecto al proyecto PHP - Laravel
 
