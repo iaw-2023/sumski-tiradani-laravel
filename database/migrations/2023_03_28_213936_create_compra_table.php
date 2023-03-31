@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('compra', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('cliente_id') 
+                ->references('id')
+                ->on('cliente'); 
+            $table->float('precio_total');
+            $table->string('forma_de_pago');
+            $table->string('direccion_de_entrega');
+            $table->dateTime('fecha_hora')->default(DB::raw('NOW()'));
         });
     }
 
