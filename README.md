@@ -2,22 +2,25 @@
 
 ### Idea a implementar
 
+#### ⚽TuCasaca.com⚽
+
 Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde los usuarios podrán explorar una tienda donde las camisetas estarán separadas por distintas categorías (como puede ser paises, ligas, clubes) y tendrán la posibilidad de comprarlas y personalizarlas modificando su nombre y número a estampar.
 
-## Información a utilizar
+## ⚽Información a utilizar
 
 ### Diagrama ER
 
-![Diagrama entidad-relacion inicial](https://i.imgur.com/owH6qjB.png)
-
--   **Camiseta**
-
-    -   El producto a vender, caracterizado por un _identificador_, un _precio_ y los _talles disponibles_.
-    -   Pertenece a **una o varias** _categorías_.
+![Diagrama entidad-relacion inicial](https://i.imgur.com/zSVUewE.png)
 
 -   **Categoría**
 
     -   Entidades que organizan camisetas, tienen un _identificador_ y un _nombre_.
+
+-   **Camiseta**
+
+    -   El producto a vender, caracterizado por un _identificador_, un _nombre_ y _descripción_, un _precio_ y los _talles disponibles_.
+    -   Además contiene una **imágen** del _frente_ y el _dorso_.
+    -   Pertenece a **una o varias** _categorías_.
 
 -   **Pedido**
 
@@ -29,27 +32,57 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
 
     -   Una compra está compuesta por **varios** pedidos de camisetas.
     -   Tiene asociado **un** cliente que realizó la compra.
-    -   Posee información sobre _medio de pago_, el _valor total_ de la compra, la _dirección de entrega_, el _estado_ de la misma y las _fecha_ y _hora_ de        realizacion de la compra. 
+    -   Posee información sobre _medio de pago_, el _valor total_ de la compra, la _dirección de entrega_, el _estado_ de la misma y las _fecha_ y _hora_ de realizacion de la compra.
 
 -   **Cliente**
-    -   Un cliente se identifica por un _email_, _nombre_ y _apellido_. 
+    -   Un cliente se identifica por un _email_.
     -   A este están asociados **todos** sus pedidos de compra.
 
-## Respecto al proyecto PHP - Laravel
+## ⚽Respecto al proyecto PHP - Laravel
 
 ### Entidades actualizables
 
+-   Se pueden modificar/crear a través de la web:
+    -   **Camisetas** (nuevas o modificar las existentes)
+    -   **Categorias** (nuevas o modificar las existentes)
+    -   Actualizar el estado de las **Compras** de los clientes
+
 ### Reportes
+
+-   Se podrá visualizar
+    -   **Camisetas** existentes
+    -   **Pedidos** y **compras** hechas
+    -   **Clientes** que hayan comprado
 
 ### Entidades obtenibles por API
 
+-   Por API se podrá obtener:
+    -   **Categorías** existentes.
+    -   **Camisetas** existentes.
+    -   Historial de **Compras** por usuario.
+
 ### Entidades modificables por API
 
-## Respecto al proyecto en JS - React
+-   Por API se podrá modificar:
+    -   (Crear) **compras** y **pedidos**.
+
+## ⚽Respecto al proyecto en JS - React
 
 ### Informacion que verá el cliente
 
+-   El usuario podrá ver:
+    -   **Camisetas** por **categoría**.
+    -   Si ingresa su mail, sus **compras** antes realizadas.
+
 ### Acciones disponibles para el cliente
+
+-   El cliente podrá ver camisetas, organizarlas por categoría, elegir comprarlas, elegir talle para cada una, elegir si la quiere personalizar con un nombre y número en específico y mandar cuáles son estas personalizaciones, y luego a la hora de efectuar la compra elegir un medio de pago y agregar información de entrega.
+
+<br/>
+
+-   El usuario la primera vez que ingrese a la página, la única diferencia es que no va a poder ver compras realizadas porque no tiene. Pero luego si podría. Cuando vea sus compras realizadas, podrá ver en qué estado se encuentra el pedido (ej: esperando pago, en viaje, entregado..)
+
+---
 
 ## Pasos
 
