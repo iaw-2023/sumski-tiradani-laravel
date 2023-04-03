@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class clienteSeeder extends Seeder
 {
@@ -12,6 +14,51 @@ class clienteSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+        DB::table('cliente')->insert([
+            'email' => Str::random(10).'@gmail.com'
+        ]);
+
     }
 }

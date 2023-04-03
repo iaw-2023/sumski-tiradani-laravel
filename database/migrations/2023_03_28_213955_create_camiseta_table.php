@@ -18,7 +18,7 @@ return new class extends Migration
             $table->float('precio');
             $table->binary('imagen_frente');
             $table->binary('imagen_atras');
-            $table->string('talles disponibles');
+            $table->string('talles_disponibles');
         });
     }
 

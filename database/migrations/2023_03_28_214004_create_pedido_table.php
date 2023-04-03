@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('nombre_a_estampar');
             $table->string('numero_a_estampar');
             $table->string('talle_elegido');
-            $table->timestamps();
         });
     }
 
