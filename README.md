@@ -4,7 +4,7 @@
 
 #### ⚽TuCasaca.com⚽
 
-Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde los usuarios podrán explorar una tienda donde las camisetas estarán separadas por distintas categorías (como puede ser paises, ligas, clubes) y tendrán la posibilidad de comprarlas y personalizarlas modificando su nombre y número a estampar.
+Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde los usuarios podrán explorar una tienda donde las camisetas estarán separadas por distintas categorías (como puede ser paises, ligas, clubes) y tendrán la posibilidad de comprarlas y personalizarlas agregando un nombre y número a estampar.
 
 ## ⚽Información a utilizar
 
@@ -18,8 +18,8 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
 
 -   **Camiseta**
 
-    -   El producto a vender, caracterizado por un _identificador_, un _nombre_ y _descripción_, un _precio_ y los _talles disponibles_.
-    -   Además contiene una **imágen** del _frente_ y el _dorso_.
+    -   El producto a vender, caracterizado por un _identificador_, un _nombre_ y _descripción_, un _precio_ y los _talles existentes_.
+    -   Además contiene una **imágen** del _frente_ y el _dorso_ de la camiseta.
     -   Pertenece a **una o varias** _categorías_.
 
 -   **Pedido**
@@ -32,7 +32,7 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
 
     -   Una compra está compuesta por **varios** pedidos de camisetas.
     -   Tiene asociado **un** cliente que realizó la compra.
-    -   Posee información sobre _medio de pago_, el _valor total_ de la compra, la _dirección de entrega_, el _estado_ de la misma y las _fecha_ y _hora_ de realizacion de la compra.
+    -   Posee información sobre _medio de pago_, el _valor total_ de la compra, la _dirección de entrega_, el _estado_ de la misma y la _fecha_ y _hora_ de realizacion de la compra.
 
 -   **Cliente**
     -   Un cliente se identifica por un _email_.
@@ -40,31 +40,47 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
 
 ## ⚽Respecto al proyecto PHP - Laravel
 
-### Entidades actualizables
+### Web
 
--   Se pueden modificar/crear a través de la web:
-    -   **Camisetas** (nuevas o modificar las existentes)
-    -   **Categorias** (nuevas o modificar las existentes)
-    -   Actualizar el estado de las **Compras** de los clientes
+#### Entidades actualizables
 
-### Reportes
+-   Se pueden crear/eliminar a través de la web de los admin las siguientes entidades:
+
+    -   **Camisetas**
+    -   **Categorias**
+
+-   y se pueden modificar:
+    -   **Camisetas**: cambiando los atributos de las como la descripción, los talles o las imágenes.
+    -   **Categorias**: cambiando el nombre de alguna categoría.
+    -   Actualizar el estado de las **Compras** de los clientes, informando por ejemplo si la misma está "En proceso" o "Pago Realizado", etc.
+
+#### Reportes
 
 -   Se podrá visualizar
-    -   **Camisetas** existentes
-    -   **Pedidos** y **compras** hechas
-    -   **Clientes** que hayan comprado
 
-### Entidades obtenibles por API
+    -   **Camisetas** existentes, con sus categorías.
+    -   **Compras** hechas con todos sus **Pedidos** detallados.
+    -   **Clientes** que hayan comprado, pudiendo también ver todas las compras de los mismos.
+
+### API
+
+#### Entidades obtenibles por API
 
 -   Por API se podrá obtener:
+
     -   **Categorías** existentes.
-    -   **Camisetas** existentes.
-    -   Historial de **Compras** por usuario.
+    -   **Camisetas** existentes, todas o por **Categorías**.
+    -   Historial de **Compras** con sus **Pedidos** por usuario.
 
-### Entidades modificables por API
+#### Entidades modificables por API
 
--   Por API se podrá modificar:
-    -   (Crear) **compras** y **pedidos**.
+-   Por API se podrá:
+    -   Crear entidades **Compra** con varios **Pedidos**.
+    -   Al crear una Compra a través de esta API, como se necesita un email, se crea un **Cliente** para asociar la compra, si es que este no existía antes.
+
+#### Aclaracion
+
+-   Toda esta información solicitada a través de la API por la web es para que el sitio web de los clientes muestre la información correspondiente. Y la información envíada es para que se almacenen las compras.
 
 ## ⚽Respecto al proyecto en JS - React
 
@@ -72,15 +88,16 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
 
 -   El usuario podrá ver:
     -   **Camisetas** por **categoría**.
-    -   Si ingresa su mail, sus **compras** antes realizadas.
+    -   Si ingresa su mail, sus **Compras** antes realizadas con todos sus **Pedidos**.
 
 ### Acciones disponibles para el cliente
 
--   El cliente podrá ver camisetas, organizarlas por categoría, elegir comprarlas, elegir talle para cada una, elegir si la quiere personalizar con un nombre y número en específico y mandar cuáles son estas personalizaciones, y luego a la hora de efectuar la compra elegir un medio de pago y agregar información de entrega.
+-   El cliente podrá **ver camisetas**, **organizarlas por categoría**, elegir **comprarlas**, **elegir talle** para cada una, elegir si la quiere **personalizar con un nombre y número** en específico y mandar cuáles son estas personalizaciones, y luego a la hora de efectuar la compra **elegir un medio de pago** y agregar **información de entrega**.
 
 <br/>
 
--   El usuario la primera vez que ingrese a la página, la única diferencia es que no va a poder ver compras realizadas porque no tiene. Pero luego si podría. Cuando vea sus compras realizadas, podrá ver en qué estado se encuentra el pedido (ej: esperando pago, en viaje, entregado..)
+-   El usuario la primera vez que ingrese a la página, la única diferencia es que no va a poder **ver compras realizadas** porque no tiene.
+    Luego si podría, usando el mail con el que realizó las compras ver las mismas, con el propósito de **ver en qué estado se encuentran** (ej: esperando pago, en viaje, entregado..)
 
 ---
 
