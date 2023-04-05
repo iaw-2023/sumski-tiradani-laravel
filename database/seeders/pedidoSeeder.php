@@ -21,6 +21,13 @@ class pedidoSeeder extends Seeder
             'talle_elegido' => 'L' 
         ]);
         DB::table('pedido')->insert([
+            'compra_id' => 1,
+            'camiseta_id' => 1,
+            'nombre_a_estampar' => 'Juan Roman Riquelme',
+            'numero_a_estampar' => '10',
+            'talle_elegido' => 'M' 
+        ]);
+        DB::table('pedido')->insert([
             'compra_id' => 2,
             'camiseta_id' => 2,
             'nombre_a_estampar' => 'Marcelo Gallardo',
@@ -54,6 +61,20 @@ class pedidoSeeder extends Seeder
             'nombre_a_estampar' => 'Karim Benzema',
             'numero_a_estampar' => '9',
             'talle_elegido' => 'L' 
+        ]);
+        DB::table('pedido')->insert([
+            'compra_id' => 7,
+            'camiseta_id' => 4,
+            'nombre_a_estampar' => 'Bukayo Saka',
+            'numero_a_estampar' => '7',
+            'talle_elegido' => 'M' 
+        ]);
+        DB::table('pedido')->insert([
+            'compra_id' => 7,
+            'camiseta_id' => 1,
+            'nombre_a_estampar' => 'Jack Grealish',
+            'numero_a_estampar' => '66',
+            'talle_elegido' => 'S' 
         ]);
     }
 }
