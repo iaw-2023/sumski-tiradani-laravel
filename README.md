@@ -21,7 +21,7 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
     -   El producto a vender, caracterizado por un _identificador_, un _nombre_ y _descripción_, un _precio_ y los _talles existentes_.
     -   Además contiene una **imágen** del _frente_ y el _dorso_ de la camiseta.
     -   Pertenece a **una o varias** _categorías_.
-    -   Puede estar **Activa** o no, esto simplifica la idea de stock, que debería ser manejado a parte.
+    -   Puede estar **Activa o no**, esto simplifica la idea de stock, que debería ser manejado a mano por el dueño de la tienda.
 
 -   **Pedido**
 

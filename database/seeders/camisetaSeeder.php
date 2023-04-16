@@ -23,7 +23,8 @@ class camisetaSeeder extends Seeder
             'precio' => 34.999,
             'imagen_frente' => $front,
             'imagen_atras' => $back,
-            'talles_disponibles' => 'S, M, L, XL, XXL'
+            'talles_disponibles' => 'S, M, L, XL, XXL',
+            'activo' => 0
         ]);
 
         $front = file_get_contents('public/seed_images/river_frente.png');
