@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(camisetaSeeder::class);
         $this->call(pedidoSeeder::class);
         $this->call(camiseta_a_categoriaSeeder::class);
+        $this->call(usuarioSeeder::class);
     }
 }
