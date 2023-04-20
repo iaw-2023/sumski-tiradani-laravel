@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pedido', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('compra_id') 
+        Schema::create('camisetas_a_categorias', function (Blueprint $table) {
+            //$table->id();
+            $table->foreignId('camisetas_id') 
                 ->references('id')
-                ->on('compra'); 
-            $table->foreignId('camiseta_id') 
+                ->on('camisetas'); 
+            $table->foreignId('categorias_id') 
                 ->references('id')
-                ->on('camiseta'); 
-            $table->string('nombre_a_estampar');
-            $table->string('numero_a_estampar');
-            $table->string('talle_elegido');
+                ->on('categorias'); 
         });
     }
 
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pedido');
+        Schema::dropIfExists('camisetas_a_categorias');
     }
 };

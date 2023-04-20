@@ -14,49 +14,49 @@ class clienteSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
-        DB::table('cliente')->insert([
+        DB::table('clientes')->insert([
             'email' => Str::random(10).'@gmail.com'
         ]);
 

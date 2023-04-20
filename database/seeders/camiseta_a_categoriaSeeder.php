@@ -19,48 +19,48 @@ class camiseta_a_categoriaSeeder extends Seeder
     public function run(): void
     {
         // Camiseta Boca
-        DB::table('camiseta_a_categoria')->insert([
-            'camiseta_id' => 1,
-            'categoria_id' => 2, //Categoria club
+        DB::table('camisetas_a_categorias')->insert([
+            'camisetas_id' => 1,
+            'categorias_id' => 2, //Categoria club
         ]);
-        DB::table('camiseta_a_categoria')->insert([
-            'camiseta_id' => 1,
-            'categoria_id' => 3,
+        DB::table('camisetas_a_categorias')->insert([
+            'camisetas_id' => 1,
+            'categorias_id' => 3,
         ]);
-        DB::table('camiseta_a_categoria')->insert([
-            'camiseta_id' => 1,
-            'categoria_id' => 9,
+        DB::table('camisetas_a_categorias')->insert([
+            'camisetas_id' => 1,
+            'categorias_id' => 9,
         ]);
         // Camiseta River
-        DB::table('camiseta_a_categoria')->insert([
-            'camiseta_id' => 2,
-            'categoria_id' => 2,
+        DB::table('camisetas_a_categorias')->insert([
+            'camisetas_id' => 2,
+            'categorias_id' => 2,
         ]);
-        DB::table('camiseta_a_categoria')->insert([
-            'camiseta_id' => 2,
-            'categoria_id' => 3,
+        DB::table('camisetas_a_categorias')->insert([
+            'camisetas_id' => 2,
+            'categorias_id' => 3,
         ]);
-        DB::table('camiseta_a_categoria')->insert([
-            'camiseta_id' => 2,
-            'categoria_id' => 10,
+        DB::table('camisetas_a_categorias')->insert([
+            'camisetas_id' => 2,
+            'categorias_id' => 10,
         ]);
         // Camiseta Seleccion Argentina
-        DB::table('camiseta_a_categoria')->insert([
-            'camiseta_id' => 3,
-            'categoria_id' => 1,
+        DB::table('camisetas_a_categorias')->insert([
+            'camisetas_id' => 3,
+            'categorias_id' => 1,
         ]);
-        DB::table('camiseta_a_categoria')->insert([
-            'camiseta_id' => 3,
-            'categoria_id' => 3,
+        DB::table('camisetas_a_categorias')->insert([
+            'camisetas_id' => 3,
+            'categorias_id' => 3,
         ]);
         // Camiseta Seleccion Alemania
-        DB::table('camiseta_a_categoria')->insert([
-            'camiseta_id' => 4,
-            'categoria_id' => 1,
+        DB::table('camisetas_a_categorias')->insert([
+            'camisetas_id' => 4,
+            'categorias_id' => 1,
         ]);
-        DB::table('camiseta_a_categoria')->insert([
-            'camiseta_id' => 4,
-            'categoria_id' => 4,
+        DB::table('camisetas_a_categorias')->insert([
+            'camisetas_id' => 4,
+            'categorias_id' => 4,
         ]);
     }
 }

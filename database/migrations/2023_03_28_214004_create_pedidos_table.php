@@ -11,14 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('camiseta_a_categoria', function (Blueprint $table) {
-            //$table->id();
-            $table->foreignId('camiseta_id') 
+        Schema::create('pedidos', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('compras_id') 
                 ->references('id')
-                ->on('camiseta'); 
-            $table->foreignId('categoria_id') 
+                ->on('compras'); 
+            $table->foreignId('camisetas_id') 
                 ->references('id')
-                ->on('categoria'); 
+                ->on('camisetas'); 
+            $table->string('nombre_a_estampar');
+            $table->string('numero_a_estampar');
+            $table->string('talle_elegido');
         });
     }
 
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('camiseta_a_categoria');
+        Schema::dropIfExists('pedidos');
     }
 };

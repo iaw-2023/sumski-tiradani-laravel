@@ -13,54 +13,54 @@ class categoriaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Selecciones'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Clubes'
         ]);
 
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Argentina'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Inglaterra'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'España'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Francia'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Alemania'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Colombia'
         ]);
 
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Boca'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'River'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Barcelona'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Real Madrid'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Bayern Munchen'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Olimpo'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Villa Mitre'
         ]);
-        DB::table('categoria')->insert([
+        DB::table('categorias')->insert([
             'name' => 'Paris Saint-Germain'
         ]);
     }
