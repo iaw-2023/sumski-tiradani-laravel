@@ -20,6 +20,7 @@ return new class extends Migration
             $table->binary('imagen_atras');
             $table->string('talles_disponibles');
             $table->boolean('activo')->default(1);
+            $table->timestamps();
         });
     }
 

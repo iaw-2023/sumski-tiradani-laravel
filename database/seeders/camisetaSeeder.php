@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class camisetaSeeder extends Seeder
 {
@@ -24,7 +25,9 @@ class camisetaSeeder extends Seeder
             'imagen_frente' => $front,
             'imagen_atras' => $back,
             'talles_disponibles' => 'S, M, L, XL, XXL',
-            'activo' => 0
+            'activo' => 0,
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon::now()->toDateTimeString(),
         ]);
 
         $front = file_get_contents('public/seed_images/river_frente.png');
@@ -37,7 +40,9 @@ class camisetaSeeder extends Seeder
             'precio' => 34.999,
             'imagen_frente' => $front,
             'imagen_atras' => $back,
-            'talles_disponibles' => 'S, M, L, XL, XXL'
+            'talles_disponibles' => 'S, M, L, XL, XXL',
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon::now()->toDateTimeString(),
         ]);
 
         $front = file_get_contents('public/seed_images/argentina_frente.webp');
@@ -50,7 +55,9 @@ class camisetaSeeder extends Seeder
             'precio' => 24.999,
             'imagen_frente' => $front,
             'imagen_atras' => $back,
-            'talles_disponibles' => 'S, M, L, XL, XXL'
+            'talles_disponibles' => 'S, M, L, XL, XXL',
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon::now()->toDateTimeString(),
         ]);
 
         $front = file_get_contents('public/seed_images/alemania_frente.webp');
@@ -63,7 +70,9 @@ class camisetaSeeder extends Seeder
             'precio' => 1,
             'imagen_frente' => $front,
             'imagen_atras' => $back,
-            'talles_disponibles' => 'S, M, L, XL, XXL'
+            'talles_disponibles' => 'S, M, L, XL, XXL',
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon::now()->toDateTimeString(),
         ]);
         
     }

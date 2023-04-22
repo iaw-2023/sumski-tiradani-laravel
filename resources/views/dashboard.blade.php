@@ -11,6 +11,9 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
                 </div>
+                <div class="p-6">
+                    <a class="underline text-blue-500" href="/camisetas">Test Vista Tabla Camisetas</a>
+                </div>
             </div>
         </div>
     </div>
