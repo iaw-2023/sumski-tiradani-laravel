@@ -4,6 +4,7 @@
 /public/hot
 /public/storage
 /public/images/*
+!/public/images/dummy.txt
 /storage/*.key
 /vendor
 .env
