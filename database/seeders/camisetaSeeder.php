@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
-use Carbon\Carbon;
 
 class camisetaSeeder extends Seeder
 {
@@ -14,9 +13,9 @@ class camisetaSeeder extends Seeder
      */
     public function run(): void
     {
-        $front = file_get_contents('public/seed_images/boca_frente.jpg');
+        $front = file_get_contents('database/seed_images/boca_frente.jpg');
         $front = base64_encode($front);
-        $back = file_get_contents('public/seed_images/boca_atras.jpg');
+        $back = file_get_contents('database/seed_images/boca_atras.jpg');
         $back = base64_encode($back);
         DB::table('camisetas')->insert([
             'nombre' => 'Camiseta Titular Boca',
@@ -26,13 +25,13 @@ class camisetaSeeder extends Seeder
             'imagen_atras' => $back,
             'talles_disponibles' => 'S, M, L, XL, XXL',
             'activo' => 0,
-            'created_at' => Carbon::now()->toDateTimeString(),
-            'updated_at' => Carbon::now()->toDateTimeString(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
-        $front = file_get_contents('public/seed_images/river_frente.png');
+        $front = file_get_contents('database/seed_images/river_frente.png');
         $front = base64_encode($front);
-        $back = file_get_contents('public/seed_images/river_atras.png');
+        $back = file_get_contents('database/seed_images/river_atras.png');
         $back = base64_encode($back);
         DB::table('camisetas')->insert([
             'nombre' => 'Camiseta Titular River',
@@ -41,13 +40,13 @@ class camisetaSeeder extends Seeder
             'imagen_frente' => $front,
             'imagen_atras' => $back,
             'talles_disponibles' => 'S, M, L, XL, XXL',
-            'created_at' => Carbon::now()->toDateTimeString(),
-            'updated_at' => Carbon::now()->toDateTimeString(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
-        $front = file_get_contents('public/seed_images/argentina_frente.webp');
+        $front = file_get_contents('database/seed_images/argentina_frente.webp');
         $front = base64_encode($front);
-        $back = file_get_contents('public/seed_images/argentina_atras.webp');
+        $back = file_get_contents('database/seed_images/argentina_atras.webp');
         $back = base64_encode($back);
         DB::table('camisetas')->insert([
             'nombre' => 'Camiseta Titular Argentina',
@@ -56,13 +55,13 @@ class camisetaSeeder extends Seeder
             'imagen_frente' => $front,
             'imagen_atras' => $back,
             'talles_disponibles' => 'S, M, L, XL, XXL',
-            'created_at' => Carbon::now()->toDateTimeString(),
-            'updated_at' => Carbon::now()->toDateTimeString(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
-        $front = file_get_contents('public/seed_images/alemania_frente.webp');
+        $front = file_get_contents('database/seed_images/alemania_frente.webp');
         $front = base64_encode($front);
-        $back = file_get_contents('public/seed_images/alemania_atras.webp');
+        $back = file_get_contents('database/seed_images/alemania_atras.webp');
         $back = base64_encode($back);
         DB::table('camisetas')->insert([
             'nombre' => 'Camiseta Titular Alemania',
@@ -71,8 +70,8 @@ class camisetaSeeder extends Seeder
             'imagen_frente' => $front,
             'imagen_atras' => $back,
             'talles_disponibles' => 'S, M, L, XL, XXL',
-            'created_at' => Carbon::now()->toDateTimeString(),
-            'updated_at' => Carbon::now()->toDateTimeString(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         
     }
