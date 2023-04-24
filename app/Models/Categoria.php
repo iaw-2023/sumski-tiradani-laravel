@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
 
-class Camiseta extends Model
+class Categoria extends Model
 {
     use HasFactory;
 
-    public function categorias(): BelongsToMany
+    public function camisetas(): BelongsToMany
     {
-        return $this->belongsToMany(Categoria::class);
+        return $this->belongsToMany(Camiseta::class);
     }
 }

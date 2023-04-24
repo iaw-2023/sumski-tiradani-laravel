@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('clientes_id') 
+            $table->foreignId('cliente_id') 
                 ->references('id')
                 ->on('clientes'); 
             $table->float('precio_total');

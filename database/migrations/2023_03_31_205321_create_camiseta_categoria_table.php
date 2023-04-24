@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('camisetas_a_categorias', function (Blueprint $table) {
+        Schema::create('camiseta_categoria', function (Blueprint $table) {
             //$table->id();
-            $table->foreignId('camisetas_id') 
+            $table->foreignId('camiseta_id') 
                 ->references('id')
                 ->on('camisetas'); 
-            $table->foreignId('categorias_id') 
+            $table->foreignId('categoria_id') 
                 ->references('id')
                 ->on('categorias'); 
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('camisetas_a_categorias');
+        Schema::dropIfExists('camiseta_categoria');
     }
 };

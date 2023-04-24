@@ -14,43 +14,43 @@ class compraSeeder extends Seeder
     public function run(): void
     {
         DB::table('compras')->insert([
-            'clientes_id' => 1,
+            'cliente_id' => 1,
             'precio_total' => 50000,
             'forma_de_pago' => 'Tarjeta Mastercard',
             'direccion_de_entrega' => 'Castelar 2051'
         ]);
         DB::table('compras')->insert([
-            'clientes_id' => 2,
+            'cliente_id' => 2,
             'precio_total' => 500000,
             'forma_de_pago' => 'Tarjeta Visa',
             'direccion_de_entrega' => 'Alberdi 467'
         ]);
         DB::table('compras')->insert([
-            'clientes_id' => 3,
+            'cliente_id' => 3,
             'precio_total' => 5000000,
             'forma_de_pago' => 'Efectivo',
             'direccion_de_entrega' => 'Castelar 2051'
         ]);
         DB::table('compras')->insert([
-            'clientes_id' => 4,
+            'cliente_id' => 4,
             'precio_total' => 5000000,
             'forma_de_pago' => 'Transferencia bancaria',
             'direccion_de_entrega' => 'Brandsen 805'
         ]);
         DB::table('compras')->insert([
-            'clientes_id' => 3,
+            'cliente_id' => 3,
             'precio_total' => 421.60,
             'forma_de_pago' => 'Transferencia bancaria',
             'direccion_de_entrega' => 'Antezana 247'
         ]);
         DB::table('compras')->insert([
-            'clientes_id' => 2,
+            'cliente_id' => 2,
             'precio_total' => 123456,
             'forma_de_pago' => 'Transferencia bancaria',
             'direccion_de_entrega' => 'Avenida Figueroa Alcorta 7509'
         ]);
         DB::table('compras')->insert([
-            'clientes_id' => 2,
+            'cliente_id' => 2,
             'precio_total' => 40739798,
             'forma_de_pago' => 'Efectivo',
             'direccion_de_entrega' => 'Parchappe y Falucho'

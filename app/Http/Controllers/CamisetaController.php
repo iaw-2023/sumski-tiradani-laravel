@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Camiseta;
+use App\Models\Categoria;
+use App\Models\RelacionCamisetaCategoria;
 
 class CamisetaController extends Controller
 {
@@ -15,7 +17,7 @@ class CamisetaController extends Controller
         $camisetas = Camiseta::all();
 
         foreach ($camisetas as $camiseta) {
-
+            // loading images
             $updatedDate = str_replace(':', '-', $camiseta->updated_at);
             $updatedDate = str_replace(' ', '_', $updatedDate);
 
@@ -34,6 +36,14 @@ class CamisetaController extends Controller
                 fwrite($file, $image);
                 fclose($file);
             }
+
+            // fetching categories names from remera-categoria relation
+            $categoriesName = array();
+            foreach($camiseta->categorias as $category){
+                array_push($categoriesName, $category->name);
+            }
+
+            $camiseta->categorias = implode(', ', $categoriesName);
         }
 
         return view('tables.camisetas', ['camisetas' => $camisetas]);

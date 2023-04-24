@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('compras_id') 
+            $table->foreignId('compra_id') 
                 ->references('id')
                 ->on('compras'); 
-            $table->foreignId('camisetas_id') 
+            $table->foreignId('camiseta_id') 
                 ->references('id')
                 ->on('camisetas'); 
             $table->string('nombre_a_estampar');

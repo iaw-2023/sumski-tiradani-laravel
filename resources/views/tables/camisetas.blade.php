@@ -16,7 +16,8 @@
               <th class="nosort">Atras</th>
               <th>Talles Disponibles</th>
               <th>Activo</th>
-              <th class="nosort">Modificar</th>
+              <th class="nosort">Categorías</th>
+              <th class="nosort">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@
                 @else
                   <td>🚫</td>
                 @endif
+                <td>{{mb_strimwidth($camiseta->categorias, 0, 40, "...")}}</td>
                 <td>
                   <span>
                     <button type="button" class="btn btn-primary">Editar</button>
@@ -52,22 +54,18 @@
         $('#camisetasTable').DataTable({
           'lengthMenu': [5, 10, 20, 50],
           'responsive': true,
-          'aoColumnDefs': [{
-            'bSort': false,
-            'aTargets': ['nosort']
-          }],
+          'columnDefs': [
+            { orderable: false, targets: [2,4,5,8,9] }
+          ],
           "columnDefs": [
             { "width": "15%", "targets": [1] },
-            { "width": "18%", "targets": [2] },
+            { "width": "15%", "targets": [2] },
             { "width": "6%", "targets": [4,5] },
             { "width": "10%", "targets": [6] },
-            { "width": "5%", "targets": [7] }
+            { "width": "5%", "targets": [7] },
           ]
         });
         $(".dataTables_length select").addClass("px-4");
       });
     </script>
-
-  </body>
-
 @endsection
