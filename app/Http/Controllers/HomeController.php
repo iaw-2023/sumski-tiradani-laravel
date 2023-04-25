@@ -11,10 +11,8 @@ use App\Models\Cliente;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function showHomeStats()
     {
         $camisetas = Camiseta::all();
         $pedidos = Pedidos::count();

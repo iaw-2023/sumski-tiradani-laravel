@@ -9,8 +9,4 @@ class Pedidos extends Model
 {
     use HasFactory;
 
-    public function categorias(): BelongsToMany
-    {
-        return $this->belongsToMany(Pedidos::class);
-    }
 }
