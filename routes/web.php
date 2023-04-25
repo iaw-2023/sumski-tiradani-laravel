@@ -24,6 +24,7 @@ Route::get('/home', [HomeController::class, 'showHomeStats'])->middleware(['auth
 /* Test de controller y modelo */
 Route::get('/clientes',  [ClienteController::class, 'index'])->middleware(['auth', 'verified']);
 Route::get('/camisetas',  [CamisetaController::class, 'index'])->middleware(['auth', 'verified'])->name('camisetas');
+Route::get('/camisetas/nuevo', [CamisetaController::class, 'create'])->middleware(['auth', 'verified'])->name('crear_camiseta');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
