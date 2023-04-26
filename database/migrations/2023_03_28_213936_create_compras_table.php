@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('forma_de_pago');
             $table->string('direccion_de_entrega');
             $table->dateTime('fecha_hora')->default(DB::raw('NOW()'));
+            $table->string('estado');
         });
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Camiseta;
 use App\Models\Categoria;
 use App\Models\RelacionCamisetaCategoria;
-use App\Models\Pedidos;
+use App\Models\Pedido;
 use App\Models\Cliente;
 
 class HomeController extends Controller
@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function showHomeStats()
     {
         $camisetas = Camiseta::all();
-        $pedidos = Pedidos::count();
+        $pedidos = Pedido::count();
 
         $activas = 0;
         $clientes_totales = Cliente::count();

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CamisetaController;
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\HomeController;
 
 /*
@@ -21,11 +22,18 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'showHomeStats'])->middleware(['auth', 'verified'])->name('home');
 Route::get('/home', [HomeController::class, 'showHomeStats'])->middleware(['auth', 'verified'])->name('home');
 
-/* Test de controller y modelo */
+// Rutas clientes
 Route::get('/clientes',  [ClienteController::class, 'index'])->middleware(['auth', 'verified']);
+
+// Rutas camisetas
 Route::get('/camisetas',  [CamisetaController::class, 'index'])->middleware(['auth', 'verified'])->name('camisetas');
 Route::get('/camisetas/nuevo', [CamisetaController::class, 'create'])->middleware(['auth', 'verified'])->name('crear_camiseta');
 
+// Rutas compras y pedidos
+Route::get('/compras',  [CompraController::class, 'index'])->middleware(['auth', 'verified'])->name('compras');
+Route::get('/compras/{id}',  [CompraController::class, 'show'])->middleware(['auth', 'verified']);
+
+// Rutas perfil/auth
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

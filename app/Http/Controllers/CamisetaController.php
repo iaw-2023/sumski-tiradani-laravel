@@ -54,7 +54,7 @@ class CamisetaController extends Controller
      */
     public function create()
     {
-        return view('create.camisetas');
+        return view('create.new_camiseta');
     }
 
     /**
