@@ -26,7 +26,7 @@
                 <td>{{$camiseta->id}}</td>
                 <td>{{$camiseta->nombre}}</td>
                 <td>{{mb_strimwidth($camiseta->descripcion, 0, 40, "...")}}</td>
-                <td>${{$camiseta->precio}}</td>
+                <td>${{number_format($camiseta->precio,2)}}</td>
                 <td><img src="images/{{$camiseta->id}}frente_{{str_replace(' ', '_',str_replace(':', '-', $camiseta->updated_at))}}.jpg" width=100/></td>
                 <td><img src="images/{{$camiseta->id}}atras_{{str_replace(' ', '_',str_replace(':', '-', $camiseta->updated_at))}}.jpg" width=100/></td>
                 <td>{{$camiseta->talles_disponibles}}</td>

@@ -8,7 +8,7 @@
         <h3>Ticket</h3><br>
         E-mail: {{ $compra->cliente->email }}
         <br>
-        Precio Total: {{ $compra->precio_total }} 
+        Precio Total: {{ "$".number_format($compra->precio_total,2) }} 
         <br>
         Cantidad Items: {{ count($compra->pedidos) }}
         <br>
@@ -43,7 +43,7 @@
               <td>{{ $pedido->nombre_a_estampar }}</td>
               <td>{{ $pedido->numero_a_estampar }}</td>
               <td>{{ $pedido->talle_elegido }}</td>
-              <td>{{ $pedido->camiseta->precio }}</td>
+              <td>{{ "$".number_format($pedido->precio,2) }}</td>
             </tr>
           @endforeach
         </tbody>
@@ -55,8 +55,7 @@
     <!-- Datatables JS -->
     <script>
       $(document).ready(function () {
-        $('#pedidosTable').DataTable({
-          'lengthMenu': [5, 10, 20, 50],
+        $('#pedidosTable').DataTable({  
           'responsive': true,
           'columnDefs': [
             { orderable: false, targets: [] }

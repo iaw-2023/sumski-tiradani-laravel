@@ -23,7 +23,7 @@
             <tr>
                 <td>{{ $compra->id }}</td>
                 <td>{{ $compra->cliente->email }}</td>
-                <td>{{ $compra->precio_total }}</td>
+                <td>{{ "$".number_format($compra->precio_total,2) }}</td>
                 <td>{{ count($compra->pedidos) }}</td>
                 <td>{{ $compra->forma_de_pago }}</td>
                 <td>{{ $compra->direccion_de_entrega }}</td>

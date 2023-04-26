@@ -10,7 +10,7 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
 
 ### Diagrama ER
 
-![Diagrama entidad-relacion inicial](https://i.imgur.com/Peppubr.png)
+![Diagrama entidad-relacion inicial](https://i.imgur.com/NAQeRRM.png)
 
 -   **Categoría**
 
@@ -28,6 +28,7 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
     -   Un pedido está asociado a **una** camiseta en específico.
     -   Pertenece a **una** compra.
     -   Tiene como atributos un _talle elegido_ y una posible personalización con un _número y nombre a estampar_.
+    -   Además tiene _precio_ para conservar el valor pagado a pesar de modificaciones del precio del producto.
 
 -   **Compra**
 
