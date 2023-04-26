@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Cliente;
 
 class ClienteController extends Controller
@@ -12,8 +14,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $test = Cliente::all();
-        echo $test;
+        $clientes = Cliente::all();
+        return view('tables.clientes', ['clientes' => $clientes]);
     }
 
     /**
@@ -37,7 +39,19 @@ class ClienteController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
+
+            $cliente = Cliente::find($id);
+            if($cliente == null){
+                abort(404);
+            }
+            $compras = $cliente->compras;
+
+            return view('tables.cliente_compras', ['cliente' => $cliente, 'compras' => $compras]);
+        } catch (ValidationException $e) {
+            abort(404);
+        }
     }
 
     /**

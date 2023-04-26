@@ -4,7 +4,8 @@
     {{-- ver si se queda --}}
     <div class="bg-white shadow p-3 rounded-lg"> 
       <h1>Camisetas</h1>
-      <a href="camisetas/nuevo" type="button" class="btn btn-success my-3">Nueva Camiseta</a>
+      <hr>
+      <a href="camisetas/nuevo" type="button" class="btn btn-success my-3">Nueva Camiseta</a><br>
       <table id="camisetasTable" class="display" style="width: 100%">
         <thead>
             <tr>

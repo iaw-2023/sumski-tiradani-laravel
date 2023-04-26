@@ -23,7 +23,8 @@ Route::get('/', [HomeController::class, 'showHomeStats'])->middleware(['auth', '
 Route::get('/home', [HomeController::class, 'showHomeStats'])->middleware(['auth', 'verified'])->name('home');
 
 // Rutas clientes
-Route::get('/clientes',  [ClienteController::class, 'index'])->middleware(['auth', 'verified']);
+Route::get('/clientes',  [ClienteController::class, 'index'])->middleware(['auth', 'verified'])->name('clientes');
+Route::get('/clientes/{id}',  [ClienteController::class, 'show'])->middleware(['auth', 'verified']);
 
 // Rutas camisetas
 Route::get('/camisetas',  [CamisetaController::class, 'index'])->middleware(['auth', 'verified'])->name('camisetas');

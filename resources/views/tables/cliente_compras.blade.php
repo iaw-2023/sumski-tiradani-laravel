@@ -2,14 +2,18 @@
 
 @section('content')
     <div class="bg-white shadow p-3 rounded-lg"> 
-      <h1>Compras</h1>
-      <hr>
-      <br>
+      <h1>Cliente</h1>
+      <div class="lead">
+        <h3>Información personal</h3>
+        Email: {{ $cliente->email}}<br>
+        ID: {{$cliente->id}}
+      </div>
+      <hr><br>
+      <h3>Compras realizadas</h3><br>
       <table id="comprasTable" class="display" style="width: 100%">
         <thead>
             <tr>
               <th>ID</th>
-              <th>Cliente</th>
               <th>Precio</th>
               <th>Cantidad items</th>
               <th>Forma de Pago</th>
@@ -23,7 +27,6 @@
           @foreach ($compras as $compra) 
             <tr>
                 <td>{{ $compra->id }}</td>
-                <td>{{ $compra->cliente->email }}</td>
                 <td>{{ "$".number_format($compra->precio_total,2) }}</td>
                 <td>{{ count($compra->pedidos) }}</td>
                 <td>{{ $compra->forma_de_pago }}</td>
@@ -32,7 +35,7 @@
                 <td>{{ $compra->estado }}</td>
                 <td>
                   <span>
-                    <a type="button" href="compras/{{$compra->id}}" class="btn btn-primary">Ver detalle</a>
+                    <a type="button" href={{url('compras/'.$compra->id)}} class="btn btn-primary">Ver detalle</a>
                     <a type="button" class="btn btn-warning">Actualizar estado</a>
                   </span>
                 </td>

@@ -3,7 +3,7 @@
 @section('content')
     <div class="bg-white shadow p-3 rounded-lg"> 
       <h1>Compra Código {{$compra->id}}</h1>
-      <br>
+      <hr><br>
       <div class="lead">
         <h3>Ticket</h3><br>
         E-mail: {{ $compra->cliente->email }}
@@ -19,7 +19,8 @@
         Fecha y Hora de Compra: {{ $compra->fecha_hora }}
         <br>
         Estado: {{ $compra->estado }}
-        <br>
+        <br><br>
+        <a type="button" class="btn btn-warning">Actualizar estado</a>
       </div>
       <hr>
       <div>
