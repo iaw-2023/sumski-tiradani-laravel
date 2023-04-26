@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Compra;
 
 class CompraController extends Controller
@@ -37,9 +39,19 @@ class CompraController extends Controller
      */
     public function show(string $id)
     {
-        $compra = Compra::find($id);
-        $pedidos = $compra->pedidos ;
-        return view('tables.compra_pedidos', ['compra' => $compra, 'pedidos' => $pedidos]);
+        try {
+            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
+
+            $compra = Compra::find($id);
+            if($compra == null){
+                abort(404);
+            }
+
+            $pedidos = $compra->pedidos ;
+            return view('tables.compra_pedidos', ['compra' => $compra, 'pedidos' => $pedidos]);
+        } catch (ValidationException $e) {
+            abort(404);
+        }
     }
 
     /**
