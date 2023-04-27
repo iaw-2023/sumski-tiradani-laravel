@@ -11,6 +11,8 @@
         <hr>
         <a href="/camisetas/nuevo" type="button" class="btn btn-success my-3">Nueva Camiseta</a><br>
       @endif
+      @include('components.alert.success')
+      @include('components.alert.deleted')
       <table id="camisetasTable" class="display" style="width: 100%">
         <thead>
             <tr>

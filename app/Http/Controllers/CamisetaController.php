@@ -119,7 +119,7 @@ class CamisetaController extends Controller
 
         $categorias = Categoria::all()->pluck('name');
         
-        return redirect('/camisetas');
+        return redirect('/camisetas')->with("success", "La camiseta ".$camiseta->nombre.' fue creada con éxito');
     }
 
     /**

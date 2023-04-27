@@ -5,6 +5,7 @@
       <h1>Compras</h1>
       <hr>
       <br>
+      @include('components.alert.success')
       <table id="comprasTable" class="display" style="width: 100%">
         <thead>
             <tr>

@@ -22,6 +22,7 @@
         <br><br>
         <a type="button" class="btn btn-warning">Actualizar estado</a>
       </div>
+      @include('components.alert.success')
       <hr>
       <div>
         <h3>Detalle con todos los pedidos</h3><br>
