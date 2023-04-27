@@ -104,20 +104,22 @@ class CamisetaController extends Controller
         $talles = substr($talles, 0, -2);
         $camiseta->talles_disponibles = $talles;
 
-        $imagen_frente = $request->file('imagen_frente');     
-        echo($imagen_frente);                                                                                                                                                                                          
-        //$imagen_frente = base64_encode($imagen_frente->get());
+        $atras = $request->file('imagen_atras');
+        $atras = base64_encode($atras->get());
 
-        $imagen_atras = $request->file('imagen_atras'); 
-        //$imagen_atras = base64_encode($imagen_atras->get());
+        $frente = $request->file('imagen_frente');
+        $frente = base64_encode($frente->get());
 
-        $camiseta->imagen_frente = 123;
-        $camiseta->imagen_atras = 423;
+        
+
+        $camiseta->imagen_frente = $frente;
+        $camiseta->imagen_atras = $atras;
 
         $camiseta->save();
 
         $categorias = Categoria::all()->pluck('name');
-        return view('tables.camisetas', ['categorias' => $categorias]);
+        
+        return redirect('/camisetas');
     }
 
     /**
@@ -133,7 +135,9 @@ class CamisetaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $camiseta = Camiseta::where('id', $id)->first();
+        $categorias = Categoria::all()->pluck('name');
+        return view('create.edit_camiseta', ['camiseta' => $camiseta, 'categorias'=>$categorias]);
     }
 
     /**

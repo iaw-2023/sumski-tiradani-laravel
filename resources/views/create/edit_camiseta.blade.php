@@ -3,25 +3,25 @@
 @section('content')
     {{-- ver si se queda --}}
     <div class="bg-white shadow p-3 rounded-lg"> 
-        <h1>Nueva camiseta</h1>
+        <h1>Editar camiseta</h1>
         <hr>
-        <form action="/camisetas" method="post" enctype="multipart/form-data">
+        <form action="/camisetas" method="post">
             @csrf
             <div class="container">
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group" >
-                            <label for="exampleInputEmail1">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
-                            <label for="exampleInputEmail1">Descripción</label>
-                            <input type="text" class="form-control" name="descripcion" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                            <label for="nombre">Nombre</label>
+                            <input type="text" name="nombre" value="{{old('nombre', $camiseta->nombre)}}" class="form-control" id="nombre" aria-describedby="emailHelp" >
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" class="form-control" name="descripcion" id="descripcion" aria-describedby="emailHelp" >
                             
-                            <label for="exampleInputEmail1">Precio</label>
+                            <label for="precio">Precio</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">$</span>
+                                    <span class="input-group-text" id="precio">$</span>
                                 </div>
-                                <input type="text" class="form-control" name="precio" aria-label="Amount (to the nearest dollar)">
+                                <input type="text" class="form-control" name="precio" value="{{old('precio', $camiseta->precio)}}" aria-label="Amount (to the nearest dollar)">
                                 <div class="input-group-append">
                                     <span class="input-group-text">.00</span>
                                 </div>
@@ -30,13 +30,10 @@
                             <label for="btn-group">Talles disponibles</label>
                             <br>
                             <div class="btn-group " role="group" aria-label="Basic checkbox toggle button group">
-                                
-                                
-                                <label class="btn btn-outline-primary" for="btncheck1">S
-                                <input type="checkbox" class="btn-check" name="botonS" id="btncheck1" autocomplete="on" ckecked>
-                                </label>
+                                <input type="checkbox" class="btn-check" name="botonS" id="btncheck1" autocomplete="{{old('talleS', $camiseta->talleS)}}">
+                                <label class="btn btn-outline-primary" for="btncheck1">S</label>
 
-                                <input type="checkbox" class="btn-check" name="botonM" id="btncheck2" ckecked autocomplete="on">
+                                <input type="checkbox" class="btn-check" name="botonM" id="btncheck2" autocomplete="on">
                                 <label class="btn btn-outline-primary" for="btncheck2">M</label>
 
                                 <input type="checkbox" class="btn-check" name="botonL" id="btncheck3" autocomplete="off">
@@ -71,12 +68,12 @@
                     <br>
                         <div class="row ">
                             <label class="fs-4 form-label">Imagen frente</label>
-                            <input type="file" name="imagen_frente" id="imagen_frente" enctype="multipart/form-data">
+                            <input type="file" name="imagen_frente" id="imagen_frente">
                         </div>    
                         <br> <br>            
                         <div class="row pt-5 ">
                             <label class="fs-4 form-label">Imagen atras</label>
-                            <input type="file" name="imagen_atras" id="imagen_atras" enctype="multipart/form-data">
+                            <input type="file" name="imagen_atras" id="imagen_frente">
                         </div>
                     <div>
                 </div>

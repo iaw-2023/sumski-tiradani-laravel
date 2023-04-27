@@ -53,7 +53,7 @@
                 </td>
                 <td>
                   <span>
-                    <button type="button" class="btn btn-primary">Editar</button>
+                    <a href="/camisetas/{{$camiseta->id}}/edit" type="button" class="btn btn-primary">Editar</a>
                     <button type="button" class="btn btn-danger">Eliminar</button>
                   </span>
                 </td>

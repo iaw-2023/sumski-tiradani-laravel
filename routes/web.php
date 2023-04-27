@@ -33,6 +33,7 @@ Route::get('/camisetas/categoria/{id}', [CamisetaController::class, 'indexByCate
 Route::get('/camisetas/nuevo', [CamisetaController::class, 'create'])->middleware(['auth', 'verified']);
 Route::post('/camisetas', [CamisetaController::class, 'store'])->middleware(['auth', 'verified']);
 Route::resource('/games/{gameName}', SpeedrunVideoController::class, array('only' => array('indexByCategory') ) )->middleware(['auth', 'verified']);
+Route::get('/camisetas/{nombre}/edit', [CamisetaController::class, 'edit'])->middleware(['auth', 'verified']);
 
 // Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->middleware(['auth', 'verified'])->name('categorias');
