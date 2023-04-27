@@ -29,6 +29,7 @@ Route::get('/clientes/{id}',  [ClienteController::class, 'show'])->middleware(['
 // Rutas camisetas
 Route::get('/camisetas',  [CamisetaController::class, 'index'])->middleware(['auth', 'verified'])->name('camisetas');
 Route::get('/camisetas/nuevo', [CamisetaController::class, 'create'])->middleware(['auth', 'verified'])->name('crear_camiseta');
+Route::post('/camisetas', [CamisetaController::class, 'store'])->middleware(['auth', 'verified']);
 
 // Rutas compras y pedidos
 Route::get('/compras',  [CompraController::class, 'index'])->middleware(['auth', 'verified'])->name('compras');

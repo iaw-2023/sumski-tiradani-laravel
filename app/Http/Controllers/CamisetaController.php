@@ -54,7 +54,8 @@ class CamisetaController extends Controller
      */
     public function create()
     {
-        return view('create.new_camiseta');
+        $categorias = Categoria::all()->pluck('name');
+        return view('create.new_camiseta', ['categorias' => $categorias]);
     }
 
     /**
@@ -62,7 +63,43 @@ class CamisetaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $camisetas = Camiseta::all();
+        $camiseta = new Camiseta();
+
+        $camiseta->nombre = $request->get('nombre');
+        $camiseta->descripcion = $request->get('descripcion');
+        $camiseta->precio = $request->get('precio');
+
+        $talle_S = $request->get('botonS');
+        $talle_M = $request->get('botonM');
+        $talle_L = $request->get('botonL');
+        $talle_XL = $request->get('botonXL');
+
+        $talles = "";
+
+        if($talle_S) $talles .= "S, ";
+        if($talle_M) $talles .= "M, ";
+        if($talle_L) $talles .= "L, ";
+        if($talle_XL) $talles .= "XL, ";
+
+        // Elimina la trailing comma
+        $talles = substr($talles, 0, -2);
+        $camiseta->talles_disponibles = $talles;
+
+        $imagen_frente = $request->file('imagen_frente');     
+        echo($imagen_frente);                                                                                                                                                                                          
+        //$imagen_frente = base64_encode($imagen_frente->get());
+
+        $imagen_atras = $request->file('imagen_atras'); 
+        //$imagen_atras = base64_encode($imagen_atras->get());
+
+        $camiseta->imagen_frente = 123;
+        $camiseta->imagen_atras = 423;
+
+        $camiseta->save();
+
+        $categorias = Categoria::all()->pluck('name');
+        return view('tables.camisetas', ['categorias' => $categorias]);
     }
 
     /**
