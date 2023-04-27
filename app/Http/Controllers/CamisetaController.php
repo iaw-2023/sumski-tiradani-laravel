@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Camiseta;
 use App\Models\Categoria;
 use App\Models\RelacionCamisetaCategoria;
+use Illuminate\Support\Facades\Validator;
 
 class CamisetaController extends Controller
 {
@@ -15,7 +16,33 @@ class CamisetaController extends Controller
     public function index()
     {
         $camisetas = Camiseta::all();
+        $camisetas = $this->loadImages($camisetas);
+        return view('tables.camisetas', ['camisetas' => $camisetas]);
+    }
 
+    /**
+     * Display a listing of the resource in a category
+     */
+    public function indexByCategory(string $id)
+    {
+        try {
+            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
+
+            $categoria = Categoria::find($id);
+            if($categoria == null){
+                abort(404);
+            }
+            
+            $camisetas = $categoria->camisetas;
+            $camisetas = $this->loadImages($camisetas);
+            return view('tables.camisetas', ['camisetas' => $camisetas, 'categoria' => $categoria ]);
+        } catch (ValidationException $e) {
+            abort(404);
+        }
+    }
+
+    private function loadImages($camisetas)
+    {
         foreach ($camisetas as $camiseta) {
             // loading images
             $updatedDate = str_replace(':', '-', $camiseta->updated_at);
@@ -36,17 +63,8 @@ class CamisetaController extends Controller
                 fwrite($file, $image);
                 fclose($file);
             }
-
-            // fetching categories names from remera-categoria relation
-            $categoriesName = array();
-            foreach($camiseta->categorias as $category){
-                array_push($categoriesName, $category->name);
-            }
-
-            $camiseta->categorias = implode(', ', $categoriesName);
         }
-
-        return view('tables.camisetas', ['camisetas' => $camisetas]);
+        return $camisetas;
     }
 
     /**

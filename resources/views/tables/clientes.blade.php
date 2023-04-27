@@ -21,7 +21,7 @@
                 <td>{{ count($cliente->compras) }}</td>
                 <td>
                   <span>
-                    <a type="button" href="clientes/{{$cliente->id}}" class="btn btn-primary">Ver compras</a>
+                    <a type="button" href="/clientes/{{$cliente->id}}" class="btn btn-primary">Ver compras</a>
                   </span>
                 </td>
             </tr>

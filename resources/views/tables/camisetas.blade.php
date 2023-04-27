@@ -3,9 +3,14 @@
 @section('content')
     {{-- ver si se queda --}}
     <div class="bg-white shadow p-3 rounded-lg"> 
-      <h1>Camisetas</h1>
-      <hr>
-      <a href="camisetas/nuevo" type="button" class="btn btn-success my-3">Nueva Camiseta</a><br>
+      @if (isset($categoria))
+        <h1>Camisetas de {{$categoria->name}}</h1>
+        <hr>
+      @else
+        <h1>Camisetas</h1>
+        <hr>
+        <a href="/camisetas/nuevo" type="button" class="btn btn-success my-3">Nueva Camiseta</a><br>
+      @endif
       <table id="camisetasTable" class="display" style="width: 100%">
         <thead>
             <tr>
@@ -28,15 +33,24 @@
                 <td>{{$camiseta->nombre}}</td>
                 <td>{{mb_strimwidth($camiseta->descripcion, 0, 40, "...")}}</td>
                 <td>${{number_format($camiseta->precio,2)}}</td>
-                <td><img src="images/{{$camiseta->id}}frente_{{str_replace(' ', '_',str_replace(':', '-', $camiseta->updated_at))}}.jpg" width=100/></td>
-                <td><img src="images/{{$camiseta->id}}atras_{{str_replace(' ', '_',str_replace(':', '-', $camiseta->updated_at))}}.jpg" width=100/></td>
+                <td><img src="/images/{{$camiseta->id}}frente_{{str_replace(' ', '_',str_replace(':', '-', $camiseta->updated_at))}}.jpg" width=100/></td>
+                <td><img src="/images/{{$camiseta->id}}atras_{{str_replace(' ', '_',str_replace(':', '-', $camiseta->updated_at))}}.jpg" width=100/></td>
                 <td>{{$camiseta->talles_disponibles}}</td>
                 @if ($camiseta->activo == 1)
                   <td>✅</td>
                 @else
                   <td>🚫</td>
                 @endif
-                <td>{{mb_strimwidth($camiseta->categorias, 0, 40, "...")}}</td>
+                <td>
+                  @php
+                    $categoriesName = array();
+                    foreach($camiseta->categorias as $category){
+                      array_push($categoriesName, $category->name);
+                    }
+                    $categorias = implode(', ', $categoriesName);
+                  @endphp
+                  {{mb_strimwidth($categorias, 0, 40, "...")}}
+                </td>
                 <td>
                   <span>
                     <button type="button" class="btn btn-primary">Editar</button>

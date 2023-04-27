@@ -35,7 +35,7 @@
                 <td>{{ $compra->estado }}</td>
                 <td>
                   <span>
-                    <a type="button" href={{url('compras/'.$compra->id)}} class="btn btn-primary">Ver detalle</a>
+                    <a type="button" href="/compras/{{$compra->id}}" class="btn btn-primary">Ver detalle</a>
                     <a type="button" class="btn btn-warning">Actualizar estado</a>
                   </span>
                 </td>
