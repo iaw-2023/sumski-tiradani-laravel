@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use App\Models\Compra;
 
 class CompraController extends Controller
@@ -59,7 +60,18 @@ class CompraController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        try {
+            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
+
+            $compra = Compra::find($id);
+            if($compra == null){
+                abort(404);
+            }
+
+            return view('edit.edit_compra', ['compra' => $compra]);
+        } catch (ValidationException $e) {
+            abort(404);
+        }
     }
 
     /**
@@ -67,7 +79,29 @@ class CompraController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
+
+            $compra = Compra::find($id);
+            if($compra == null){
+                abort(404);
+            }
+
+            $request->validate([
+                'estado' => [
+                    'required',
+                    'string',
+                    Rule::in(['Entregado', 'En viaje', 'En preparacion', 'Esperando pago', 'Cancelado'])
+                ]
+            ]);
+
+            $compra->estado = $request->estado;
+            $compra->update();
+
+            return redirect("/compras/".$id)->with("success", "La compra ".$id." de ".$compra->cliente->email." fue actualizada correctamente.");
+        } catch (ValidationException $e) {
+            abort(404);
+        }
     }
 
     /**

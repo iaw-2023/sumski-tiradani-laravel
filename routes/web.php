@@ -32,7 +32,6 @@ Route::get('/camisetas', [CamisetaController::class, 'index'])->middleware(['aut
 Route::get('/camisetas/categoria/{id}', [CamisetaController::class, 'indexByCategory'])->middleware(['auth', 'verified']);
 Route::get('/camisetas/nuevo', [CamisetaController::class, 'create'])->middleware(['auth', 'verified']);
 Route::post('/camisetas', [CamisetaController::class, 'store'])->middleware(['auth', 'verified']);
-Route::resource('/games/{gameName}', SpeedrunVideoController::class, array('only' => array('indexByCategory') ) )->middleware(['auth', 'verified']);
 Route::get('/camisetas/{nombre}/edit', [CamisetaController::class, 'edit'])->middleware(['auth', 'verified']);
 
 // Rutas categorias
@@ -41,6 +40,8 @@ Route::get('/categorias', [CategoriaController::class, 'index'])->middleware(['a
 // Rutas compras y pedidos
 Route::get('/compras', [CompraController::class, 'index'])->middleware(['auth', 'verified'])->name('compras');
 Route::get('/compras/{id}', [CompraController::class, 'show'])->middleware(['auth', 'verified']);
+Route::get('/compras/{id}/edit', [CompraController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::post('/compras/{id}/edit', [CompraController::class, 'update'])->middleware(['auth', 'verified']);
 
 // Rutas perfil/auth
 Route::middleware('auth')->group(function () {

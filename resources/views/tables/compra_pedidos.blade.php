@@ -20,7 +20,8 @@
         <br>
         Estado: {{ $compra->estado }}
         <br><br>
-        <a type="button" class="btn btn-warning">Actualizar estado</a>
+        <a type="button" href="/compras/{{$compra->id}}/edit" class="btn btn-warning">Actualizar estado</a>
+        <br><br>
       </div>
       @include('components.alert.success')
       <hr>
