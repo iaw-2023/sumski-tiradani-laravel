@@ -18,6 +18,6 @@ class Pedido extends Model
 
     public function camiseta(): BelongsTo
     {
-        return $this->belongsTo(Camiseta::class);
+        return $this->belongsTo(Camiseta::class)->withTrashed();
     }
 }

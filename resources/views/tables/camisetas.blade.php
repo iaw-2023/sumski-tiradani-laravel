@@ -55,14 +55,29 @@
                 </td>
                 <td>
                   <span>
-                    <a href="/camisetas/{{$camiseta->id}}/edit" type="button" class="btn btn-primary">Editar</a>
-                    <button type="button" class="btn btn-danger">Eliminar</button>
+                    <form action="/camisetas/{{$camiseta->id}}/stock" method="post">
+                      @csrf
+                      <a href="/camisetas/{{$camiseta->id}}/edit" type="button" class="btn btn-primary">Editar</a>
+                      <button type="submit" class="btn btn-warning">Actualizar stock</button>
+                      <a href="/camisetas/{{$camiseta->id}}/delete" type="button" class="btn btn-danger">Eliminar</a>
+                    </form>
                   </span>
                 </td>
             </tr>
           @endforeach
         </tbody>
       </table>
+
+      <x-modal name="modal-sm" id="modal-sm" title="Advertencia" size="sm">
+        <x-slot name="body">
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        </x-slot>
+        <x-slot name="footer">
+          <button type="button" class="btn btn-danger">Eliminar<button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </x-slot>
+      </x-modal>
+
     </div>
 
     <!-- Datatables JS -->

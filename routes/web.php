@@ -32,7 +32,11 @@ Route::get('/camisetas', [CamisetaController::class, 'index'])->middleware(['aut
 Route::get('/camisetas/categoria/{id}', [CamisetaController::class, 'indexByCategory'])->middleware(['auth', 'verified']);
 Route::get('/camisetas/nuevo', [CamisetaController::class, 'create'])->middleware(['auth', 'verified']);
 Route::post('/camisetas', [CamisetaController::class, 'store'])->middleware(['auth', 'verified']);
-Route::get('/camisetas/{nombre}/edit', [CamisetaController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::get('/camisetas/{id}/edit', [CamisetaController::class, 'edit'])->middleware(['auth', 'verified']);
+//Route::post('/camisetas/{id}/edit', [CamisetaController::class, 'edit'])->middleware(['auth', 'verified']);
+Route::post('/camisetas/{id}/stock', [CamisetaController::class, 'updateStock'])->middleware(['auth', 'verified']);
+Route::get('/camisetas/{id}/delete', [CamisetaController::class, 'delete'])->middleware(['auth', 'verified']);
+Route::post('/camisetas/{id}/delete', [CamisetaController::class, 'destroy'])->middleware(['auth', 'verified']);
 
 // Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->middleware(['auth', 'verified'])->name('categorias');

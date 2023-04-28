@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('talles_disponibles');
             $table->boolean('activo')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

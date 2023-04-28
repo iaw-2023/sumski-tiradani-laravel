@@ -149,10 +149,69 @@ class CamisetaController extends Controller
     }
 
     /**
+     * Update the Activo column that represents stock
+     */
+    public function updateStock(string $id)
+    {
+        try {
+            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
+
+            $camiseta = Camiseta::find($id);
+            if($camiseta == null || ($camiseta->trashed())){
+                abort(404);
+            }
+
+            $nuevo = 0;
+            if ($camiseta->activo == 0)
+                $nuevo = 1;
+
+            $camiseta->activo = $nuevo;
+            $camiseta->update();
+
+            return redirect('/camisetas')->with("success", "El stock de la camiseta '".$camiseta->nombre."' fue actualizado con éxito");
+        } catch (ValidationException $e) {
+            abort(404);
+        }
+    }
+
+    /**
+     * Show the delete confirmation
+     */
+    public function delete(string $id)
+    {
+        try {
+            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
+
+            $camiseta = Camiseta::find($id);
+            if($camiseta == null || ($camiseta->trashed())){
+                abort(404);
+            }
+            
+            return view('edit.delete_camiseta', ['camiseta' => $camiseta]);
+        } catch (ValidationException $e) {
+            abort(404);
+        }
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
+
+            $camiseta = Camiseta::find($id);
+            if($camiseta == null || ($camiseta->trashed())){
+                abort(404);
+            }
+
+            $nombre = $camiseta->nombre;
+            $camiseta->delete();
+
+            return redirect('/camisetas')->with("delete", "La camiseta '".$nombre."' fue eliminada con éxito");
+        } catch (ValidationException $e) {
+            abort(404);
+        }
     }
 }
