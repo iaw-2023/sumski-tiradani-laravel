@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- ver si se queda --}}
     <div class="bg-white shadow p-3 rounded-lg"> 
       @if (isset($categoria))
         <h1>Camisetas de {{$categoria->name}}</h1>
@@ -23,7 +22,7 @@
               <th class="nosort">Frente</th>
               <th class="nosort">Atras</th>
               <th>Talles Disponibles</th>
-              <th>Activo</th>
+              <th>En Stock</th>
               <th class="nosort">Categorías</th>
               <th class="nosort">Acciones</th>
             </tr>
@@ -32,7 +31,7 @@
           @foreach ($camisetas as $camiseta) 
             <tr>
                 <td>{{$camiseta->id}}</td>
-                <td>{{$camiseta->nombre}}</td>
+                <td>{{mb_strimwidth($camiseta->nombre, 0, 40, "...")}}</td>
                 <td>{{mb_strimwidth($camiseta->descripcion, 0, 40, "...")}}</td>
                 <td>${{number_format($camiseta->precio,2)}}</td>
                 <td><img src="/images/{{$camiseta->id}}frente_{{str_replace(' ', '_',str_replace(':', '-', $camiseta->updated_at))}}.jpg" width=100/></td>
@@ -67,17 +66,6 @@
           @endforeach
         </tbody>
       </table>
-
-      <x-modal name="modal-sm" id="modal-sm" title="Advertencia" size="sm">
-        <x-slot name="body">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-        </x-slot>
-        <x-slot name="footer">
-          <button type="button" class="btn btn-danger">Eliminar<button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        </x-slot>
-      </x-modal>
-
     </div>
 
     <!-- Datatables JS -->
@@ -90,7 +78,7 @@
             { orderable: false, targets: [2,4,5,8,9] }
           ],
           "columnDefs": [
-            { "width": "15%", "targets": [1] },
+            { "width": "12%", "targets": [1] },
             { "width": "15%", "targets": [2] },
             { "width": "6%", "targets": [4,5] },
             { "width": "10%", "targets": [6] },

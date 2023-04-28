@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- ver si se queda --}}
     <div class="bg-white shadow p-3 rounded-lg"> 
         <h1>Nueva camiseta</h1>
         <hr>

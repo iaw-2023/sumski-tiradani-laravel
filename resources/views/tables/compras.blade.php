@@ -53,7 +53,7 @@
             { orderable: false, targets: [] }
           ],
           "columnDefs": [
-            { "width": "15%", "targets": [] }
+            { "width": "5%", "targets": [3] }
           ]
         });
         $(".dataTables_length select").addClass("px-4");

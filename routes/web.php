@@ -40,6 +40,8 @@ Route::post('/camisetas/{id}/delete', [CamisetaController::class, 'destroy'])->m
 
 // Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->middleware(['auth', 'verified'])->name('categorias');
+Route::get('/categorias/{id}/delete', [CategoriaController::class, 'delete'])->middleware(['auth', 'verified']);
+Route::post('/categorias/{id}/delete', [CategoriaController::class, 'destroy'])->middleware(['auth', 'verified']);
 
 // Rutas compras y pedidos
 Route::get('/compras', [CompraController::class, 'index'])->middleware(['auth', 'verified'])->name('compras');

@@ -26,6 +26,7 @@
                 <td>
                   <span>
                     <a href="/camisetas/categoria/{{$categoria->id}}" type="button" class="btn btn-primary">Ver camisetas</a>
+                    <a href="/categorias/{{$categoria->id}}/delete" type="button" class="btn btn-danger">Eliminar</a>
                   </span>
                 </td>
             </tr>
@@ -40,6 +41,7 @@
         $('#categoriasTable').DataTable({
           'lengthMenu': [5, 10, 20, 50],
           'responsive': true,
+          'order': [[2, 'desc']],
         });
         $(".dataTables_length select").addClass("px-4");
       });
