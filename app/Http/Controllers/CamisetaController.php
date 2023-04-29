@@ -157,7 +157,7 @@ class CamisetaController extends Controller
             $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
 
             $camiseta = Camiseta::find($id);
-            if($camiseta == null || ($camiseta->trashed())){
+            if($camiseta == null){
                 abort(404);
             }
 
@@ -183,7 +183,7 @@ class CamisetaController extends Controller
             $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
 
             $camiseta = Camiseta::find($id);
-            if($camiseta == null || ($camiseta->trashed())){
+            if($camiseta == null){
                 abort(404);
             }
             
@@ -202,14 +202,14 @@ class CamisetaController extends Controller
             $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
 
             $camiseta = Camiseta::find($id);
-            if($camiseta == null || ($camiseta->trashed())){
+            if($camiseta == null){
                 abort(404);
             }
 
             $nombre = $camiseta->nombre;
             $camiseta->delete();
 
-            return redirect('/camisetas')->with("delete", "La camiseta '".$nombre."' fue eliminada con éxito");
+            return redirect('/camisetas')->with("deleted", "La camiseta '".$nombre."' fue eliminada con éxito");
         } catch (ValidationException $e) {
             abort(404);
         }

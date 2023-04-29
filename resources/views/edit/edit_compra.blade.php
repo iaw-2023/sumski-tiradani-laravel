@@ -18,8 +18,9 @@
         <br>
         Fecha y Hora de Compra: {{ $compra->fecha_hora }}
         <br><br>
-        <form action="/compras/{{$compra->id}}/edit" method="post" enctype="multipart/form-data">
+        <form action="/compras/{{$compra->id}}/edit" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
             <label for="estado">Seleccioná Estado:</label>
             <select id="estado" name="estado">
                 <option value="Entregado" @if($compra->estado == "Entregado") selected @endif >Entregado</option>

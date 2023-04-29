@@ -5,8 +5,9 @@
     <div class="bg-white shadow p-3 rounded-lg"> 
         <h1>Editar camiseta</h1>
         <hr>
-        <form action="/camisetas" method="post">
+        <form action="/camisetas" method="POST">
             @csrf
+            @method('PATCH')
             <div class="container">
                 <div class="row">
                     <div class="col-6">
