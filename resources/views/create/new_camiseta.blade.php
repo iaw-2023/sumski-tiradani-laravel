@@ -4,7 +4,7 @@
     <div class="bg-white shadow p-3 rounded-lg"> 
         <h1>Nueva camiseta</h1>
         <hr>
-        <form action="/camisetas" method="post" enctype="multipart/form-data">
+        <form action="/camisetas/new" method="post" enctype="multipart/form-data">
             @csrf
             <div class="container">
                 <div class="row">

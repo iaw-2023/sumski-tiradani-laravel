@@ -22,7 +22,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('create.new_categoria');
     }
 
     /**
@@ -30,7 +30,22 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => ['required', 'alpha', 'unique:categorias,name'],
+        ],
+        [
+            'nombre.required' => 'Una categoría debe tener nombre',
+            'nombre.alpha' => 'Una categoría no puede tener caracteres especiales ni números',
+            'nombre.unique' => 'Ya existe una categoría con este nombre',
+        ]
+        );
+
+        $newCategoria = new Categoria();
+        $newCategoria->name = $request->nombre;
+
+        $newCategoria->save();
+
+        return redirect('/categorias')->with('success', 'La categoría '.$newCategoria->name.' fue creada con éxito');
     }
 
     /**

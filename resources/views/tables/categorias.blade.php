@@ -5,7 +5,7 @@
     <div class="bg-white shadow p-3 rounded-lg"> 
       <h1>Categorias</h1>
       <hr>
-      <a href="" type="button" class="btn btn-success my-3">Nueva Categoría</a><br>
+      <a href="/categorias/new" type="button" class="btn btn-success my-3">Nueva Categoría</a><br>
       @include('components.alert.success')
       @include('components.alert.deleted')
       <table id="categoriasTable" class="display" style="width: 100%">

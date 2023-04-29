@@ -30,16 +30,18 @@ Route::get('/clientes/{id}', [ClienteController::class, 'show'])->middleware(['a
 // Rutas camisetas
 Route::get('/camisetas', [CamisetaController::class, 'index'])->middleware(['auth', 'verified'])->name('camisetas');
 Route::get('/camisetas/categoria/{id}', [CamisetaController::class, 'indexByCategory'])->middleware(['auth', 'verified']);
-Route::get('/camisetas/nuevo', [CamisetaController::class, 'create'])->middleware(['auth', 'verified']);
-Route::post('/camisetas', [CamisetaController::class, 'store'])->middleware(['auth', 'verified']);
+Route::get('/camisetas/new', [CamisetaController::class, 'create'])->middleware(['auth', 'verified']);
+Route::post('/camisetas/new', [CamisetaController::class, 'store'])->middleware(['auth', 'verified']);
 Route::get('/camisetas/{id}/edit', [CamisetaController::class, 'edit'])->middleware(['auth', 'verified']);
-//Route::patch('/camisetas/{id}/edit', [CamisetaController::class, 'update'])->middleware(['auth', 'verified']);
+Route::patch('/camisetas/{id}/edit', [CamisetaController::class, 'update'])->middleware(['auth', 'verified']);
 Route::patch('/camisetas/{id}/stock', [CamisetaController::class, 'updateStock'])->middleware(['auth', 'verified']);
 Route::get('/camisetas/{id}/delete', [CamisetaController::class, 'delete'])->middleware(['auth', 'verified']);
 Route::delete('/camisetas/{id}/delete', [CamisetaController::class, 'destroy'])->middleware(['auth', 'verified']);
 
 // Rutas categorias
 Route::get('/categorias', [CategoriaController::class, 'index'])->middleware(['auth', 'verified'])->name('categorias');
+Route::get('/categorias/new', [CategoriaController::class, 'create'])->middleware(['auth', 'verified']);
+Route::post('/categorias/new', [CategoriaController::class, 'store'])->middleware(['auth', 'verified']);
 Route::get('/categorias/{id}/delete', [CategoriaController::class, 'delete'])->middleware(['auth', 'verified']);
 Route::delete('/categorias/{id}/delete', [CategoriaController::class, 'destroy'])->middleware(['auth', 'verified']);
 

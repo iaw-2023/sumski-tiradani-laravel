@@ -8,7 +8,7 @@
       @else
         <h1>Camisetas</h1>
         <hr>
-        <a href="/camisetas/nuevo" type="button" class="btn btn-success my-3">Nueva Camiseta</a><br>
+        <a href="/camisetas/new" type="button" class="btn btn-success my-3">Nueva Camiseta</a><br>
       @endif
       @include('components.alert.success')
       @include('components.alert.deleted')
