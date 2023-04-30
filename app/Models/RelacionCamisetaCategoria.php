@@ -15,4 +15,5 @@ class RelacionCamisetaCategoria extends Model
      * @var string
      */
     protected $table = 'camiseta_categoria';
+
 }

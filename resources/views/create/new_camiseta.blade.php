@@ -31,11 +31,10 @@
                             <div class="btn-group " role="group" aria-label="Basic checkbox toggle button group">
                                 
                                 
-                                <label class="btn btn-outline-primary" for="btncheck1">S
-                                <input type="checkbox" class="btn-check" name="botonS" id="btncheck1" autocomplete="on" ckecked>
-                                </label>
+                                <input type="checkbox" class="btn-check" name="botonS" id="btncheck1" autocomplete="off">
+                                <label class="btn btn-outline-primary" for="btncheck1">S</label>
 
-                                <input type="checkbox" class="btn-check" name="botonM" id="btncheck2" ckecked autocomplete="on">
+                                <input type="checkbox" class="btn-check" name="botonM" id="btncheck2" ckecked autocomplete="off">
                                 <label class="btn btn-outline-primary" for="btncheck2">M</label>
 
                                 <input type="checkbox" class="btn-check" name="botonL" id="btncheck3" autocomplete="off">
