@@ -191,23 +191,6 @@ class CamisetaController extends Controller
         $talles = substr($talles, 0, -2);
         $camiseta->talles_disponibles = $talles;
 
-        $camiseta->save();
-
-        $atras = $request->file('imagen_atras');
-        $frente = $request->file('imagen_frente');
-
-        if ($atras != null) {
-            $atras = base64_encode($atras->get());
-            $camiseta->imagen_atras = $atras;
-        }
-
-        if ($frente != null) {
-            $frente = base64_encode($frente->get());
-            $camiseta->imagen_frente = $frente;
-        }
-
-        //$camiseta()->save();
-
         $categorias_old = RelacionCamisetaCategoria::where('camiseta_id', $id);
         $categorias_new = $request->get('tags');
 
@@ -221,13 +204,36 @@ class CamisetaController extends Controller
             }
         }
 
-        foreach ($categorias_old as $categoria_old) {
-            $camiseta->categorias()->detach($categoria_old);
+        $atras = $request->file('imagen_atras');
+        $frente = $request->file('imagen_frente');
+
+        if ($atras != null) {
+            $updated_date = str_replace(":", "_", $camiseta->updated_at);
+            $updatedDate = str_replace(' ', '_', $updatedDate);
+            $image_route = "images/".$camiseta->id."atras_".$updated_date.".jpg";
+            unlink($image_route); 
+
+            $atras = base64_encode($atras->get());
+            $camiseta->imagen_atras = $atras;
         }
+
+        if ($frente != null) {
+            $updated_date = str_replace(":", "_", $camiseta->updated_at);
+            $updatedDate = str_replace(' ', '_', $updatedDate);
+            $image_route = "images/".$camiseta->id."frente_".$updated_date.".jpg";
+            unlink($image_route); 
+
+            $frente = base64_encode($frente->get());
+            $camiseta->imagen_frente = $frente;
+        }
+        
+        $camiseta->save();
+
+        $camiseta->categorias()->detach();
 
         foreach ($id_categorias_new as $id_categoria_new) {
             $camiseta->categorias()->attach($id_categoria_new);
-        }
+        } 
 
         return redirect('/camisetas')->with("success", "La camiseta " . $camiseta->nombre . ' fue actualizada con éxito');
         //return redirect()->back()->with("success", "La camiseta '" . $camiseta->nombre . "' fue actualizada con éxito");
