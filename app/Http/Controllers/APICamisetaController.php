@@ -15,11 +15,6 @@ class APICamisetaController extends Controller
         $camisetas = Camiseta::all();
         $camisetas = $this->loadImages($camisetas);
         
-        // No es serializable el response de Eloquent porque hay atributos no serializables (timestamp creo)
-        foreach($camisetas as $camiseta){
-            unset($camiseta["timestamp"]);
-        }
-        
         return response()->json($camisetas);
     }
 
@@ -37,6 +32,7 @@ class APICamisetaController extends Controller
                 fwrite($file, $image);
                 fclose($file);
             }
+            $camiseta->imagen_frente = $image_route;
 
             $image_route = "images/" . $camiseta->id . "atras_" . $updatedDate . ".jpg";
             if (!file_exists($image_route)) {
@@ -45,6 +41,7 @@ class APICamisetaController extends Controller
                 fwrite($file, $image);
                 fclose($file);
             }
+            $camiseta->imagen_atras = $image_route;
         }
         return $camisetas;
     }

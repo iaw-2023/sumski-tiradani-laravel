@@ -56,6 +56,7 @@ class CamisetaController extends Controller
                 fwrite($file, $image);
                 fclose($file);
             }
+            $camiseta->imagen_frente = $image_route;
 
             $image_route = "images/" . $camiseta->id . "atras_" . $updatedDate . ".jpg";
             if (!file_exists($image_route)) {
@@ -64,6 +65,7 @@ class CamisetaController extends Controller
                 fwrite($file, $image);
                 fclose($file);
             }
+            $camiseta->imagen_atras = $image_route;
         }
         return $camisetas;
     }
@@ -99,7 +101,7 @@ class CamisetaController extends Controller
             'descripcion.required' => 'Este campo no puede estar vacío',
             'descripcion.regex' => 'Este campo no puedo contener caracteres especiales',
             'precio.required' => 'Este campo no puede estar vacío',
-            'precio' => 'El precio no puede tener mas de dos cifras de centavos',
+            'precio' => 'El precio debe ser un numero decimal, con maximo 2 cifras de centavos',
             'talles.required' => 'La camiseta debe tener al menos un talle',
             'tags.required' => 'Completar con al menos una categoría',
             'tags.*.regex' => 'Una categoría no puede tener caracteres especiales o números',
@@ -220,7 +222,7 @@ class CamisetaController extends Controller
             'descripcion.required' => 'Este campo no puede estar vacío',
             'descripcion.regex' => 'Este campo no puedo contener caracteres especiales',
             'precio.required' => 'Este campo no puede estar vacío',
-            'precio' => 'El precio no puede tener mas de dos cifras de centavos',
+            'precio' => 'El precio debe ser un numero decimal, con maximo 2 cifras de centavos',
             'talles.required' => 'La camiseta debe tener al menos un talle',
             'tags.required' => 'Completar con al menos una categoría',
             'tags.*.regex' => 'Una categoría no puede tener caracteres especiales o números',
