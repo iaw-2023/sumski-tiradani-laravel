@@ -23,7 +23,7 @@ class camisetaSeeder extends Seeder
             'precio' => 34999,
             'imagen_frente' => $front,
             'imagen_atras' => $back,
-            'talles_disponibles' => 'S, M, L, XL, XXL',
+            'talles_disponibles' => 'S, M, L, XL',
             'activo' => 0,
             'created_at' => now(),
             'updated_at' => now(),
@@ -39,7 +39,7 @@ class camisetaSeeder extends Seeder
             'precio' => 34999,
             'imagen_frente' => $front,
             'imagen_atras' => $back,
-            'talles_disponibles' => 'S, M, L, XL, XXL',
+            'talles_disponibles' => 'S, M, L, XL',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -50,11 +50,11 @@ class camisetaSeeder extends Seeder
         $back = base64_encode($back);
         DB::table('camisetas')->insert([
             'nombre' => 'Camiseta Titular Argentina',
-            'descripcion' => 'Camiseta Titular Argentina campeón del mundo 2022(3 estrellas + parche)',
+            'descripcion' => 'Camiseta Titular Argentina campeón del mundo 2022 con 3 estrellas y parche',
             'precio' => 24999,
             'imagen_frente' => $front,
             'imagen_atras' => $back,
-            'talles_disponibles' => 'S, M, L, XL, XXL',
+            'talles_disponibles' => 'S, M, L, XL',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -69,7 +69,7 @@ class camisetaSeeder extends Seeder
             'precio' => 1,
             'imagen_frente' => $front,
             'imagen_atras' => $back,
-            'talles_disponibles' => 'S, M, L, XL, XXL',
+            'talles_disponibles' => 'S, M, L, XL',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

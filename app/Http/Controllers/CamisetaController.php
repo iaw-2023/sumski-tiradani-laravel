@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Camiseta;
 use App\Models\Categoria;
 use App\Models\RelacionCamisetaCategoria;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 class CamisetaController extends Controller
@@ -81,29 +82,44 @@ class CamisetaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => ['required', 'regex:/^[a-zA-Z0-9\s\/]+$/', 'unique:camisetas,nombre'],
+            'descripcion' => ["required", 'regex:/^[a-zA-Z0-9\s\/]+$/'],
+            'precio' => ["required", 'decimal:0,2'],
+            'talles' => ["required","array","min:1"], 
+            'tags' => ["required","array","min:1"], 
+            'tags.*' => ['regex:/^[a-zA-Z\s]+$/'], 
+            'imagen_frente' => ["required", "image"],
+            'imagen_atras' => ["required", "image"],
+        ],
+        [
+            'nombre.required' => 'Este campo no puede estar vacío',
+            'nombre.regex' => 'Este campo no puedo contener caracteres especiales',
+            'nombre.unique' => 'No puede haber camisetas con nombres repetidos',
+            'descripcion.required' => 'Este campo no puede estar vacío',
+            'descripcion.regex' => 'Este campo no puedo contener caracteres especiales',
+            'precio.required' => 'Este campo no puede estar vacío',
+            'precio' => 'El precio no puede tener mas de dos cifras de centavos',
+            'talles.required' => 'La camiseta debe tener al menos un talle',
+            'tags.required' => 'Completar con al menos una categoría',
+            'tags.*.regex' => 'Una categoría no puede tener caracteres especiales o números',
+            'imagen_frente.required' => 'Una camiseta necesita una imágen de frente',
+            'imagen_atras.required' => 'Una camiseta necesita una imágen de atrás',
+            'imagen_frente.image' => 'La imágen subida debe estar en un formato permitido: jpg, png, webp',
+            'imagen_atras.image' => 'La imágen subida debe estar en un formato permitido: jpg, png, webp',
+        ]
+        );
+
         $camiseta = new Camiseta();
 
         $camiseta->nombre = $request->get('nombre');
         $camiseta->descripcion = $request->get('descripcion');
         $camiseta->precio = $request->get('precio');
 
-        $talle_S = $request->get('botonS');
-        $talle_M = $request->get('botonM');
-        $talle_L = $request->get('botonL');
-        $talle_XL = $request->get('botonXL');
-
         $talles = "";
-
-        if ($talle_S)
-            $talles .= "S, ";
-        if ($talle_M)
-            $talles .= "M, ";
-        if ($talle_L)
-            $talles .= "L, ";
-        if ($talle_XL)
-            $talles .= "XL, ";
-
-        // Elimina la trailing comma
+        foreach($request->get('talles') as $talle){
+            $talles .= $talle.", ";
+        }
         $talles = substr($talles, 0, -2);
         $camiseta->talles_disponibles = $talles;
 
@@ -120,14 +136,17 @@ class CamisetaController extends Controller
 
         // Categorias asignadas a la camiseta
         $categorias = $request->get('tags');
-        $categorias_existentes = Categoria::all();
         $id_categorias = array();
 
         foreach ($categorias as $categoria) {
-            foreach ($categorias_existentes as $categoria_existente) {
-                if (!strcmp($categoria, $categoria_existente->name)) {
-                    array_push($id_categorias, $categoria_existente->id);
-                }
+            $existe = Categoria::where('name',$categoria)->first();
+            if ($existe != null) {
+                array_push($id_categorias, $existe);
+            } else {
+                $existe = new Categoria();
+                $existe->name = $categoria;
+                $existe->save();
+                array_push($id_categorias, $existe);
             }
         }
 
@@ -151,9 +170,21 @@ class CamisetaController extends Controller
      */
     public function edit(string $id)
     {
-        $camiseta = Camiseta::where('id', $id)->first();
-        $categorias = Categoria::all()->pluck('name');
-        return view('create.edit_camiseta', ['camiseta' => $camiseta, 'categorias' => $categorias]);
+        try {
+            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
+
+            $camiseta = Camiseta::find($id);
+
+            if ($camiseta == null) {
+                abort(404);
+            }
+
+            $categorias = Categoria::all()->pluck('name');
+
+            return view('edit.edit_camiseta', ['camiseta' => $camiseta, 'categorias' => $categorias]);
+        } catch (ValidationException $e) {
+            abort(404);
+        }        
     }
 
     /**
@@ -161,82 +192,100 @@ class CamisetaController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $camiseta = null; // valida id
+        try {
+            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
+            $camiseta = Camiseta::find($id);
+            if ($camiseta == null) {
+                abort(404);
+            }
+        } catch (ValidationException $e) {
+            abort(404);
+        }        
+        // valida campos form
+        $request->validate([
+            'nombre' => ['required', 'regex:/^[a-zA-Z0-9\s\/]+$/', Rule::unique('camisetas','nombre')->ignore($id)],
+            'descripcion' => ["required", 'regex:/^[a-zA-Z0-9\s\/]+$/'],
+            'precio' => ["required", 'decimal:0,2'],
+            'talles' => ["required","array","min:1"], 
+            'tags' => ["required","array","min:1"], 
+            'tags.*' => ['regex:/^[a-zA-Z0-9\s]+$/'], 
+            'imagen_atras' => ["nullable", "image"],
+            'imagen_frente' => ["nullable", "image"],
+        ],
+        [
+            'nombre.required' => 'Este campo no puede estar vacío',
+            'nombre.regex' => 'Este campo no puedo contener caracteres especiales',
+            'nombre.unique' => 'No puede haber camisetas con nombres repetidos',
+            'descripcion.required' => 'Este campo no puede estar vacío',
+            'descripcion.regex' => 'Este campo no puedo contener caracteres especiales',
+            'precio.required' => 'Este campo no puede estar vacío',
+            'precio' => 'El precio no puede tener mas de dos cifras de centavos',
+            'talles.required' => 'La camiseta debe tener al menos un talle',
+            'tags.required' => 'Completar con al menos una categoría',
+            'tags.*.regex' => 'Una categoría no puede tener caracteres especiales o números',
+            'imagen_atras.image' => 'La imágen subida debe estar en un formato permitido: jpg, png, webp',
+            'imagen_frente.image' => 'La imágen subida debe estar en un formato permitido: jpg, png, webp',
+        ]
+        );
         $camiseta = Camiseta::where('id', $id)->first();
-        $camiseta->save();
-
-        $categorias_existentes = Categoria::all();
 
         $camiseta->nombre = $request->get('nombre');
         $camiseta->descripcion = $request->get('descripcion');
         $camiseta->precio = $request->get('precio');
-        $camiseta->save();
-
-        $talle_S = $request->get('botonS');
-        $talle_M = $request->get('botonM');
-        $talle_L = $request->get('botonL');
-        $talle_XL = $request->get('botonXL');
 
         $talles = "";
-
-        if ($talle_S)
-            $talles .= "S, ";
-        if ($talle_M)
-            $talles .= "M, ";
-        if ($talle_L)
-            $talles .= "L, ";
-        if ($talle_XL)
-            $talles .= "XL, ";
-
-        // Elimina la trailing comma
+        foreach($request->get('talles') as $talle){
+            $talles .= $talle.", ";
+        }
         $talles = substr($talles, 0, -2);
         $camiseta->talles_disponibles = $talles;
 
-        $categorias_old = RelacionCamisetaCategoria::where('camiseta_id', $id);
-        $categorias_new = $request->get('tags');
-
-        $id_categorias_new = array();
-
-        foreach ($categorias_new as $categoria_new) {
-            foreach ($categorias_existentes as $categoria_existente) {
-                if (!strcmp($categoria_new, $categoria_existente->name)) {
-                    array_push($id_categorias_new, $categoria_existente->id);
-                }
-            }
-        }
-
+        $this->unlinkOldImages($camiseta->id,$camiseta->updated_at);
+        
         $atras = $request->file('imagen_atras');
         $frente = $request->file('imagen_frente');
-
         if ($atras != null) {
-            $updated_date = str_replace(":", "_", $camiseta->updated_at);
-            $updatedDate = str_replace(' ', '_', $updatedDate);
-            $image_route = "images/".$camiseta->id."atras_".$updated_date.".jpg";
-            unlink($image_route); 
-
             $atras = base64_encode($atras->get());
             $camiseta->imagen_atras = $atras;
         }
-
         if ($frente != null) {
-            $updated_date = str_replace(":", "_", $camiseta->updated_at);
-            $updatedDate = str_replace(' ', '_', $updatedDate);
-            $image_route = "images/".$camiseta->id."frente_".$updated_date.".jpg";
-            unlink($image_route); 
-
             $frente = base64_encode($frente->get());
             $camiseta->imagen_frente = $frente;
         }
         
-        $camiseta->save();
+        $camiseta->update();
 
-        $camiseta->categorias()->detach();
+        $camiseta->categorias()->detach(); 
 
-        foreach ($id_categorias_new as $id_categoria_new) {
-            $camiseta->categorias()->attach($id_categoria_new);
+        $categorias = $request->get('tags');
+        $id_categorias = array();
+        foreach ($categorias as $categoria) {
+            $existe = Categoria::where('name',$categoria)->first();
+            if ($existe != null) {
+                array_push($id_categorias, $existe);
+            } else {
+                $existe = new Categoria();
+                $existe->name = $categoria;
+                $existe->save();
+                array_push($id_categorias, $existe);
+            }
+        }
+
+        foreach ($id_categorias as $id_categoria) {
+            $camiseta->categorias()->attach($id_categoria);
         } 
 
-        return redirect('/camisetas')->with("success", "La camiseta " . $camiseta->nombre . ' fue actualizada con éxito');
-        //return redirect()->back()->with("success", "La camiseta '" . $camiseta->nombre . "' fue actualizada con éxito");
+        return redirect('/camisetas')->with("success", "La camiseta '" . $camiseta->nombre . "' fue actualizada con éxito");
+    }
+
+    private function unlinkOldImages($camisetaID, $unformattedDate)
+    {
+        $updatedDate = str_replace(' ', '_',str_replace(":", "-", $unformattedDate));
+        $imageRoute = "images/".$camisetaID."atras_".$updatedDate.".jpg";
+        unlink($imageRoute); 
+        $imageRoute = "images/".$camisetaID."frente_".$updatedDate.".jpg";
+        unlink($imageRoute); 
     }
 
     /**
@@ -249,9 +298,7 @@ class CamisetaController extends Controller
 
             $camiseta = Camiseta::find($id);
 
-
             if ($camiseta == null) {
-
                 abort(404);
             }
 
@@ -262,7 +309,7 @@ class CamisetaController extends Controller
             $camiseta->activo = $nuevo;
             $camiseta->update();
 
-            return redirect('/camisetas')->with("success", "El stock de la camiseta '" . $camiseta->nombre . "' fue actualizado con éxito");
+            return redirect()->back()->with("success", "El stock de la camiseta '" . $camiseta->nombre . "' fue actualizado con éxito");
         } catch (ValidationException $e) {
             abort(404);
         }

@@ -42,7 +42,7 @@ class pedidoSeeder extends Seeder
             'camiseta_id' => 1,
             'nombre_a_estampar' => 'Nestor Ortigoza',
             'numero_a_estampar' => '9',
-            'talle_elegido' => 'XXL' ,
+            'talle_elegido' => 'XL' ,
             'precio' => 100.0,
         ]);
         DB::table('pedidos')->insert([

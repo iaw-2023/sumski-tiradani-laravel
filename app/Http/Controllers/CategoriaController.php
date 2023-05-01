@@ -31,11 +31,11 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => ['required', 'alpha', 'unique:categorias,name'],
+            'nombre' => ['required', 'regex:/^[a-zA-Z\s]+$/', 'unique:categorias,name'],
         ],
         [
             'nombre.required' => 'Una categoría debe tener nombre',
-            'nombre.alpha' => 'Una categoría no puede tener caracteres especiales ni números',
+            'nombre.regex' => 'Una categoría no puede tener caracteres especiales ni números',
             'nombre.unique' => 'Ya existe una categoría con este nombre',
         ]
         );
@@ -45,7 +45,7 @@ class CategoriaController extends Controller
 
         $newCategoria->save();
 
-        return redirect('/categorias')->with('success', 'La categoría '.$newCategoria->name.' fue creada con éxito');
+        return redirect('/categorias')->with('success', "La categoría '".$newCategoria->name."' fue creada con éxito");
     }
 
     /**
