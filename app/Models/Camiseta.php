@@ -12,6 +12,7 @@ class Camiseta extends Model
     use HasFactory;
     use SoftDeletes;
 
+
     public function categorias(): BelongsToMany
     {
         return $this->belongsToMany(Categoria::class);
