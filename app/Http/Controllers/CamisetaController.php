@@ -306,6 +306,8 @@ class CamisetaController extends Controller
             if ($camiseta->activo == 0)
                 $nuevo = 1;
 
+            $this->unlinkOldImages($camiseta->id,$camiseta->updated_at);
+
             $camiseta->activo = $nuevo;
             $camiseta->update();
 
