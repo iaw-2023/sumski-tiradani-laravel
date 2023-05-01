@@ -11,17 +11,22 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group" >
-                            <label for="exampleInputEmail1">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" value="{{old('nombre')}}" id="exampleInputEmail1" aria-describedby="emailHelp" >
+                            <div class="form-floating mb-3">
+                                
+                                <input type="text" name="nombre" class="form-control" value="{{old('nombre')}}" id="nombre" placeholder="name@example.com">
+                                <label for="nombre">Nombre</label>
+                            </div>
                             @error('nombre')
                             <div class="invalid-feedback d-block" role="alert">
                                 {{ $message }}
                             </div>
                             @enderror
 
-                            <label for="exampleInputEmail1">Descripción</label>
-                            <input type="text" class="form-control" name="descripcion" value="{{old('descripcion')}}" id="exampleInputEmail1" aria-describedby="emailHelp" >
-                            @error('descripcion')
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="descripcion" value="{{old('descripcion')}}" id="descripcion" placeholder="name@example.com">
+                                <label for="descripcion">Descripción</label>
+                            </div>
+                                @error('descripcion')
                             <div class="invalid-feedback d-block" role="alert">
                                 {{ $message }}
                             </div>
@@ -38,7 +43,7 @@
                                     {{ $message }}
                                 </div>
                                 @enderror
-                            </div>   
+                            </div> 
 
                             <label for="btn-group">Talles disponibles</label>
                             <br>
