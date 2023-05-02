@@ -8,9 +8,6 @@ use App\Http\Controllers\CamisetaController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\APIClienteController;
-use App\Http\Controllers\APICamisetaController;
-use App\Http\Controllers\APICategoriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,27 +18,30 @@ use App\Http\Controllers\APICategoriaController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "api" middleware group. Make something great!
 |
+*/
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/* version todo en clase separadas
+Route::apiResource('/camisetas', APICamisetaController::class);
+Route::apiResource('/clientes', APIClienteController::class);
+Route::apiResource('/categorias', APICategoriaController::class);
+*/
+
 /**
  * Camisetas
  */
-Route::apiResource('/camisetas', APICamisetaController::class);
-
-/**
- * Clientes
- */
-//Route::apiResource('/camisetas', CamisetaController::class)->middleware(['auth', 'verified'])->name('*','camisetas');
-//Route::get('/clientes', [APIClienteController::class, 'index']);
-Route::apiResource('/clientes', APIClienteController::class);
+Route::get('/camisetas', [CamisetaController::class, 'getCamisetasAPI']);
+Route::get('/camisetas/{id}', [CamisetaController::class, 'getCamisetasByCategoriaAPI']);
 
 /**
  * Categorias
  */
-Route::apiResource('/categorias', APICategoriaController::class);
+Route::get('/categorias', [CategoriaController::class, 'getCategoriasAPI']);
 
-
-
+/**
+ * Cliente/Compras
+ */
+Route::get('/clientes/{id}', [ClienteController::class, 'getComprasByClienteAPI']);

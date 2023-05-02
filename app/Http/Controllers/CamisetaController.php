@@ -42,6 +42,35 @@ class CamisetaController extends Controller
         }
     }
 
+    public function getCamisetasAPI()
+    {
+        $camisetas = Camiseta::all();
+        $camisetas = $this->loadImages($camisetas);
+        
+        return response()->json($camisetas);
+    }
+
+    public function getCamisetasByCategoriaAPI(string $id)
+    {
+        $validator = Validator::make(['id' => $id], ['id' => 'integer',]);
+
+        if ($validator->fails())
+        {
+            return response('El ID de la categoría tiene que ser un valor entero', 400);
+        }
+
+        $categoria = Categoria::find($id);
+        if ($categoria == null) {
+            return response('No existe categoría con ID '.$id, 404);
+        }
+
+        $camisetas = $categoria->camisetas();
+        $camisetas = $this->loadImages($camisetas);
+        
+        return response()->json($camisetas);
+    }
+
+
     private function loadImages($camisetas)
     {
         foreach ($camisetas as $camiseta) {

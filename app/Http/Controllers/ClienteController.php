@@ -54,6 +54,28 @@ class ClienteController extends Controller
         }
     }
 
+    public function getComprasByClienteAPI(string $id)
+    {
+        $validator = Validator::make(['id' => $id], ['id' => 'integer',]);
+
+        if ($validator->fails())
+        {
+            return response('El ID del cliente tiene que ser un valor entero', 400);
+        }
+
+        $cliente = Cliente::find($id);
+        if($cliente == null){
+            return response('No existe cliente con ID '.$id, 404);
+        }
+        $compras = $cliente->compras;
+
+        foreach ($compras as $compra){
+            $compra->pedidos->toJson();
+        }
+
+        return response()->json($compras);;
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
