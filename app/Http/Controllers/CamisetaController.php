@@ -38,36 +38,7 @@ class CamisetaController extends Controller
         $camisetas = $categoria->camisetas;
         $camisetas = $this->loadImages($camisetas);
         return view('tables.camisetas', ['camisetas' => $camisetas, 'categoria' => $categoria]);
-
     }
-
-    public function getCamisetasAPI()
-    {
-        $camisetas = Camiseta::all();
-        $camisetas = $this->loadImages($camisetas);
-
-        return response()->json($camisetas);
-    }
-
-    public function getCamisetasByCategoriaAPI(string $id)
-    {
-        $validator = Validator::make(['id' => $id], ['id' => 'integer',]);
-
-        if ($validator->fails()) {
-            return response('El ID de la categoría tiene que ser un valor entero', 400);
-        }
-
-        $categoria = Categoria::find($id);
-        if ($categoria == null) {
-            return response('No existe categoría con ID ' . $id, 404);
-        }
-
-        $camisetas = $categoria->camisetas();
-        $camisetas = $this->loadImages($camisetas);
-
-        return response()->json($camisetas);
-    }
-
 
     private function loadImages($camisetas)
     {
@@ -212,7 +183,6 @@ class CamisetaController extends Controller
         $categorias = Categoria::all()->pluck('name');
 
         return view('edit.edit_camiseta', ['camiseta' => $camiseta, 'categorias' => $categorias]);
-
     }
 
     /**
@@ -339,7 +309,6 @@ class CamisetaController extends Controller
         $camiseta->update();
 
         return redirect()->back()->with("success", "El stock de la camiseta '" . $camiseta->nombre . "' fue actualizado con éxito");
-
     }
 
     /**
@@ -356,7 +325,6 @@ class CamisetaController extends Controller
         }
 
         return view('edit.delete_camiseta', ['camiseta' => $camiseta]);
-
     }
 
     /**
@@ -374,9 +342,10 @@ class CamisetaController extends Controller
             abort(404);
         }
 
+        $this->unlinkOldImages($camiseta->id,$camiseta->updated_at);
+
         $nombre = $camiseta->nombre;
         $camiseta->delete();
         return redirect('/camisetas')->with("deleted", "La camiseta '" . $nombre . "' fue eliminada con éxito");
-
     }
 }

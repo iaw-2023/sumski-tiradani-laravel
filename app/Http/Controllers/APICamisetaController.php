@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Categoria;
 use App\Models\Camiseta;
 
 class APICamisetaController extends Controller
@@ -10,11 +12,30 @@ class APICamisetaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function getCamisetas()
     {
         $camisetas = Camiseta::all();
         $camisetas = $this->loadImages($camisetas);
-        
+
+        return response()->json($camisetas);
+    }
+
+    public function getCamisetasByCategoria(string $id)
+    {
+        $validator = Validator::make(['id' => $id], ['id' => 'integer',]);
+
+        if ($validator->fails()) {
+            return response('El ID de la categoría tiene que ser un valor entero', 400);
+        }
+
+        $categoria = Categoria::find($id);
+        if ($categoria == null) {
+            return response('No existe categoría con ID ' . $id, 404);
+        }
+
+        $camisetas = $categoria->camisetas;
+        $camisetas = $this->loadImages($camisetas);
+
         return response()->json($camisetas);
     }
 
@@ -32,7 +53,7 @@ class APICamisetaController extends Controller
                 fwrite($file, $image);
                 fclose($file);
             }
-            $camiseta->imagen_frente = $image_route;
+            $camiseta->imagen_frente = "/" . $image_route;
 
             $image_route = "images/" . $camiseta->id . "atras_" . $updatedDate . ".jpg";
             if (!file_exists($image_route)) {
@@ -41,7 +62,7 @@ class APICamisetaController extends Controller
                 fwrite($file, $image);
                 fclose($file);
             }
-            $camiseta->imagen_atras = $image_route;
+            $camiseta->imagen_atras = "/" . $image_route;
         }
         return $camisetas;
     }

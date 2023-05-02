@@ -68,5 +68,8 @@
         });
         $(".dataTables_length select").addClass("px-4");
       });
+      $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+      })
     </script>
 @endsection

@@ -17,12 +17,6 @@ class CategoriaController extends Controller
         return view('tables.categorias', ['categorias' => $categorias]);
     }
 
-    public function getCategoriasAPI()
-    {
-        $categorias = Categoria::all();
-        return response()->json($categorias);
-    }
-
     /**
      * Show the form for creating a new resource.
      */
