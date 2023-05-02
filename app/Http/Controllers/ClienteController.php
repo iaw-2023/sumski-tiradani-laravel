@@ -39,41 +39,38 @@ class ClienteController extends Controller
      */
     public function show(string $id)
     {
-        try {
-            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
-
-            $cliente = Cliente::find($id);
-            if($cliente == null){
-                abort(404);
-            }
-            $compras = $cliente->compras;
-
-            return view('tables.cliente_compras', ['cliente' => $cliente, 'compras' => $compras]);
-        } catch (ValidationException $e) {
+        $validator = Validator::make(['id' => $id], ['id' => 'integer',]);
+        if ($validator->fails())
+            abort(404);
+        $cliente = Cliente::find($id);
+        if ($cliente == null) {
             abort(404);
         }
+        $compras = $cliente->compras;
+
+        return view('tables.cliente_compras', ['cliente' => $cliente, 'compras' => $compras]);
     }
 
     public function getComprasByClienteAPI(string $id)
     {
         $validator = Validator::make(['id' => $id], ['id' => 'integer',]);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             return response('El ID del cliente tiene que ser un valor entero', 400);
         }
 
         $cliente = Cliente::find($id);
-        if($cliente == null){
-            return response('No existe cliente con ID '.$id, 404);
+        if ($cliente == null) {
+            return response('No existe cliente con ID ' . $id, 404);
         }
         $compras = $cliente->compras;
 
-        foreach ($compras as $compra){
+        foreach ($compras as $compra) {
             $compra->pedidos->toJson();
         }
 
-        return response()->json($compras);;
+        return response()->json($compras);
+        ;
     }
 
     /**

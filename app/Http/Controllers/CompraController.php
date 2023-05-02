@@ -40,19 +40,16 @@ class CompraController extends Controller
      */
     public function show(string $id)
     {
-        try {
-            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
-
-            $compra = Compra::find($id);
-            if($compra == null){
-                abort(404);
-            }
-
-            $pedidos = $compra->pedidos ;
-            return view('tables.compra_pedidos', ['compra' => $compra, 'pedidos' => $pedidos]);
-        } catch (ValidationException $e) {
+        $validator = Validator::make(['id' => $id], ['id' => 'integer',]);
+        if ($validator->fails())
+            abort(404);
+        $compra = Compra::find($id);
+        if ($compra == null) {
             abort(404);
         }
+
+        $pedidos = $compra->pedidos;
+        return view('tables.compra_pedidos', ['compra' => $compra, 'pedidos' => $pedidos]);
     }
 
     /**
@@ -60,18 +57,15 @@ class CompraController extends Controller
      */
     public function edit(string $id)
     {
-        try {
-            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
-
-            $compra = Compra::find($id);
-            if($compra == null){
-                abort(404);
-            }
-
-            return view('edit.edit_compra', ['compra' => $compra]);
-        } catch (ValidationException $e) {
+        $validator = Validator::make(['id' => $id], ['id' => 'integer',]);
+        if ($validator->fails())
+            abort(404);
+        $compra = Compra::find($id);
+        if ($compra == null) {
             abort(404);
         }
+
+        return view('edit.edit_compra', ['compra' => $compra]);
     }
 
     /**
@@ -79,29 +73,26 @@ class CompraController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        try {
-            $validatedData = Validator::make(['id' => $id], ['id' => 'integer',])->validate();
-
-            $compra = Compra::find($id);
-            if($compra == null){
-                abort(404);
-            }
-
-            $request->validate([
-                'estado' => [
-                    'required',
-                    'string',
-                    Rule::in(['Entregado', 'En viaje', 'En preparacion', 'Esperando pago', 'Cancelado'])
-                ]
-            ]);
-
-            $compra->estado = $request->estado;
-            $compra->update();
-
-            return redirect("/compras/".$id)->with("success", "La compra ".$id." de ".$compra->cliente->email." fue actualizada correctamente.");
-        } catch (ValidationException $e) {
+        $validator = Validator::make(['id' => $id], ['id' => 'integer',]);
+        if ($validator->fails())
+            abort(404);
+        $compra = Compra::find($id);
+        if ($compra == null) {
             abort(404);
         }
+
+        $request->validate([
+            'estado' => [
+                'required',
+                'string',
+                Rule::in(['Entregado', 'En viaje', 'En preparacion', 'Esperando pago', 'Cancelado'])
+            ]
+        ]);
+
+        $compra->estado = $request->estado;
+        $compra->update();
+
+        return redirect("/compras/" . $id)->with("success", "La compra " . $id . " de " . $compra->cliente->email . " fue actualizada correctamente.");
     }
 
     /**
