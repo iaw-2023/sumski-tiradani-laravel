@@ -9,8 +9,8 @@
         <form action="/categorias/{{$categoria->id}}/delete" method="POST">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-danger">Eliminar</button>
-            <a href="/categorias" type="button" class="btn btn-primary">Cancelar</a>
+            <button type="submit" class="btn btn-danger ">Eliminar</button>
+            <a href="/categorias" type="button" class="btn btn-outline-primary">Cancelar</a>
         </form>
     </div>
 @endsection

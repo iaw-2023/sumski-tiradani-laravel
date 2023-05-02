@@ -15,23 +15,21 @@
                                 
                                 <input type="text" name="nombre" class="form-control" value="{{old('nombre')}}" id="nombre" placeholder="name@example.com">
                                 <label for="nombre">Nombre</label>
+                                @error('nombre')
+                                <div class="invalid-feedback d-block" role="alert">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
-                            @error('nombre')
-                            <div class="invalid-feedback d-block" role="alert">
-                                {{ $message }}
-                            </div>
-                            @enderror
-
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" name="descripcion" value="{{old('descripcion')}}" id="descripcion" placeholder="name@example.com">
                                 <label for="descripcion">Descripción</label>
-                            </div>
                                 @error('descripcion')
-                            <div class="invalid-feedback d-block" role="alert">
-                                {{ $message }}
+                                <div class="invalid-feedback d-block" role="alert">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
-                            @enderror
-                            
                             <label for="exampleInputEmail1">Precio</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">

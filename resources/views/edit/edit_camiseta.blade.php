@@ -12,21 +12,25 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group" >
-                            <label for="nombre">Nombre</label>
-                            <input type="text" name="nombre" value="{{old('nombre', $camiseta->nombre)}}" class="form-control" id="nombre" aria-describedby="emailHelp" >
-                             @error('nombre')
-                            <div class="invalid-feedback d-block" role="alert">
-                                {{ $message }}
+                            <div class="form-floating mb-3">
+                                <input type="text" name="nombre" value="{{old('nombre', $camiseta->nombre)}}" class="form-control" id="nombre" placeholder="Nombre">
+                                <label for="nombre">Nombre</label>
+                                @error('nombre')
+                                <div class="invalid-feedback d-block" role="alert">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
-                            @enderror
-
-                            <label for="descripcion">Descripción</label>
-                            <input type="text" class="form-control" name="descripcion" value="{{old('descripcion', $camiseta->descripcion)}}" id="descripcion" aria-describedby="emailHelp" >
-                            @error('descripcion')
-                            <div class="invalid-feedback d-block" role="alert">
-                                {{ $message }}
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="descripcion" value="{{old('descripcion', $camiseta->descripcion)}}" id="descripcion" placeholder="Descripcion" >
+                                <label for="descripcion">Descripción</label>
+                                @error('descripcion')
+                                <div class="invalid-feedback d-block" role="alert">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
-                            @enderror
+                                
 
                             <label for="precio">Precio</label>
                             <div class="input-group mb-3">

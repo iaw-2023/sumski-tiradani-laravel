@@ -30,7 +30,7 @@
                 <option value="Cancelado" @if($compra->estado == "Cancelado") selected @endif>Cancelado</option>
             </select> 
             <br><br>
-            <button type="submit" class="btn btn-primary">Guardar estado</button>
+            <button type="submit" class="btn btn-outline-primary">Guardar estado</button>
         </form>
       </div>
 

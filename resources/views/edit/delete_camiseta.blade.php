@@ -11,7 +11,7 @@
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">Eliminar</button>
-            <a href="/camisetas" type="button" class="btn btn-primary">Cancelar</a>
+            <a href="/camisetas" type="button" class="btn btn-outline-primary">Cancelar</a>
         </form>
     </div>
 @endsection
