@@ -79,7 +79,7 @@ Route::prefix('_api')->group(function () {
      * Cliente/Compras
      */
     Route::get('/compras/{email}', [APICompraController::class, 'getComprasByCliente']);
-    Route::post('/compras/buy', [APICompraController::class, 'createCompra']);
+    Route::post('/comprar', [APICompraController::class, 'createCompra']);
 });
 
 require __DIR__ . '/auth.php';

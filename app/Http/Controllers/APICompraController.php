@@ -53,9 +53,50 @@ class APICompraController extends Controller
         return response()->json($compras);
     }
 
-    public function createCompra()
+    public function createCompra(Request $request)
     {
-        // TO DO
+        
+        $compra = new Compra();
+        $comprador = $request->get('cliente');
+        echo $comprador;
+        dd();
+        $compra->forma_de_pago = $request->get('forma_de_pago');
+        $compra->direccion_de_entrega = $request->get('direccion_de_entrega');
+        
+        
+        $existe = Cliente::where('email', $comprador)->first();
+        if ($existe == null) {
+            //$existe = Cliente::create(['email'=>$comprador]);
+            $existe = new Cliente();
+            $existe->email = $comprador;
+            $existe->save();
+            $compra->cliente_id = $existe->id;
+        }else{
+            $compra->cliente_id = $existe->id;
+        }
+        
+
+        $pedidos = $request->get(pedidos);
+
+        $precio_total = 0;
+        foreach($pedidos as $pedido){
+            $pedido_asociado = new Pedido();
+            $pedido_asociado->compra_id = $compra->id;
+            $camiseta = Camiseta::where('nombre', $pedido->nombre_camiseta)->first();
+            $pedido_asociado->camiseta_id = $camiseta->id;
+            $pedido_asociado->nombre_a_estampar = $pedido->nombre_a_estampar;
+            $pedido_asociado->numero_a_estampar = $pedido->numero_a_estampar;
+            $pedido_asociado->talle_elegido = $pedido->talle_elegido;
+            $pedido_asociado->precio = $camiseta->precio;
+            $precio_total += $camiseta->precio;
+            $pedido_asociado->save();
+        }
+        $compra->precio_total = $precio_total;
+        $compra->estado = "Esperando pago";
+
+        $compra->save();
+
+        return response()->json($compra);
     }
     
 
