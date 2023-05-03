@@ -61,7 +61,7 @@ class categoriaSeeder extends Seeder
             'name' => 'Villa Mitre'
         ]);
         DB::table('categorias')->insert([
-            'name' => 'Paris Saint-Germain'
+            'name' => 'Paris Saint Germain'
         ]);
     }
 }

@@ -42,27 +42,8 @@ class APICamisetaController extends Controller
     private function loadImages($camisetas)
     {
         foreach ($camisetas as $camiseta) {
-            // loading images
-            $updatedDate = str_replace(':', '-', $camiseta->updated_at);
-            $updatedDate = str_replace(' ', '_', $updatedDate);
-
-            $image_route = "images/" . $camiseta->id . "frente_" . $updatedDate . ".jpg";
-            if (!file_exists($image_route)) {
-                $image = base64_decode(stream_get_contents($camiseta->imagen_frente));
-                $file = fopen($image_route, "w");
-                fwrite($file, $image);
-                fclose($file);
-            }
-            $camiseta->imagen_frente = "/" . $image_route;
-
-            $image_route = "images/" . $camiseta->id . "atras_" . $updatedDate . ".jpg";
-            if (!file_exists($image_route)) {
-                $image = base64_decode(stream_get_contents($camiseta->imagen_atras));
-                $file = fopen($image_route, "w");
-                fwrite($file, $image);
-                fclose($file);
-            }
-            $camiseta->imagen_atras = "/" . $image_route;
+            $camiseta->imagen_frente = stream_get_contents($camiseta->imagen_frente);
+            $camiseta->imagen_atras = stream_get_contents($camiseta->imagen_atras);
         }
         return $camisetas;
     }

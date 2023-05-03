@@ -34,8 +34,8 @@
                 <td>{{mb_strimwidth($camiseta->nombre, 0, 40, "...")}}</td>
                 <td>{{mb_strimwidth($camiseta->descripcion, 0, 40, "...")}}</td>
                 <td>${{number_format($camiseta->precio,2)}}</td>
-                <td><img src={{$camiseta->imagen_frente}} width=75/></td>
-                <td><img src={{$camiseta->imagen_atras}} width=75/></td>
+                <td><img src={{"data:image/png;base64,".$camiseta->imagen_frente}} width=75/></td>
+                <td><img src={{"data:image/png;base64,".$camiseta->imagen_atras}} width=75/></td>
                 <td>{{$camiseta->talles_disponibles}}</td>
                 @if ($camiseta->activo == 1)
                   <td class="text-center">✅</td>

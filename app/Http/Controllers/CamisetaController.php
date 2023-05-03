@@ -43,27 +43,8 @@ class CamisetaController extends Controller
     private function loadImages($camisetas)
     {
         foreach ($camisetas as $camiseta) {
-            // loading images
-            $updatedDate = str_replace(':', '-', $camiseta->updated_at);
-            $updatedDate = str_replace(' ', '_', $updatedDate);
-
-            $image_route = "images/" . $camiseta->id . "frente_" . $updatedDate . ".jpg";
-            if (!file_exists($image_route)) {
-                $image = base64_decode(stream_get_contents($camiseta->imagen_frente));
-                $file = fopen($image_route, "w");
-                fwrite($file, $image);
-                fclose($file);
-            }
-            $camiseta->imagen_frente = "/" . $image_route;
-
-            $image_route = "images/" . $camiseta->id . "atras_" . $updatedDate . ".jpg";
-            if (!file_exists($image_route)) {
-                $image = base64_decode(stream_get_contents($camiseta->imagen_atras));
-                $file = fopen($image_route, "w");
-                fwrite($file, $image);
-                fclose($file);
-            }
-            $camiseta->imagen_atras = "/" . $image_route;
+            $camiseta->imagen_frente = stream_get_contents($camiseta->imagen_frente);
+            $camiseta->imagen_atras = stream_get_contents($camiseta->imagen_atras);
         }
         return $camisetas;
     }
@@ -238,8 +219,6 @@ class CamisetaController extends Controller
         $talles = substr($talles, 0, -2);
         $camiseta->talles_disponibles = $talles;
 
-        $this->unlinkOldImages($camiseta->id, $camiseta->updated_at);
-
         $atras = $request->file('imagen_atras');
         $frente = $request->file('imagen_frente');
         if ($atras != null) {
@@ -276,15 +255,6 @@ class CamisetaController extends Controller
         return redirect('/camisetas')->with("success", "La camiseta '" . $camiseta->nombre . "' fue actualizada con éxito");
     }
 
-    private function unlinkOldImages($camisetaID, $unformattedDate)
-    {
-        $updatedDate = str_replace(' ', '_', str_replace(":", "-", $unformattedDate));
-        $imageRoute = "images/" . $camisetaID . "atras_" . $updatedDate . ".jpg";
-        unlink($imageRoute);
-        $imageRoute = "images/" . $camisetaID . "frente_" . $updatedDate . ".jpg";
-        unlink($imageRoute);
-    }
-
     /**
      * Update the Activo column that represents stock
      */
@@ -302,8 +272,6 @@ class CamisetaController extends Controller
         $nuevo = 0;
         if ($camiseta->activo == 0)
             $nuevo = 1;
-
-        $this->unlinkOldImages($camiseta->id, $camiseta->updated_at);
 
         $camiseta->activo = $nuevo;
         $camiseta->update();
@@ -341,8 +309,6 @@ class CamisetaController extends Controller
         if ($camiseta == null) {
             abort(404);
         }
-
-        $this->unlinkOldImages($camiseta->id,$camiseta->updated_at);
 
         $nombre = $camiseta->nombre;
         $camiseta->delete();
