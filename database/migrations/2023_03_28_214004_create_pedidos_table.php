@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('numero_a_estampar');
             $table->string('talle_elegido');
             $table->float('precio');
+            $table->timestamps();
         });
     }
 
