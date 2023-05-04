@@ -8,8 +8,8 @@ A su vez, presentamos una API REST para luego en el proyecto 3 poder armar una a
 
 ### Links
 
--   [Deploy en Vercel](https://tucasaca-laravel-iamjuanpy-sumski-tiradani.vercel.app/)
--   [Swagger UI]()
+-   [Deploy en Vercel](https://tucasaca-laravel-git-entrega2-sumski-tiradani.vercel.app/)
+-   [Swagger UI](https://app.swaggerhub.com/apis-docs/EMATIRADANI_1/TuCasaca/1.0.0)
 
 ### Aclaraciones pertinentes
 
