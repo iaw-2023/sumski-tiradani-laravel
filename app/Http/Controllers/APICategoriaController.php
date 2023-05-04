@@ -12,6 +12,7 @@ class APICategoriaController extends Controller
     public function getCategorias()
     {
         $categorias = Categoria::all();
+        $categorias->setHidden(['id', 'created_at', 'updated_at']); // format json
         return response()->json($categorias);
     }
 
@@ -26,10 +27,9 @@ class APICategoriaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $categoria)
     {
-        $categoria = Categoria::where('id', $id)->first();
-        return response()->json($categoria);
+        //
     }
 
     /**

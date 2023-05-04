@@ -68,7 +68,7 @@ Route::prefix('_api')->group(function () {
      * Camisetas
      */
     Route::get('/camisetas', [APICamisetaController::class, 'getCamisetas']);
-    Route::get('/camisetas/categoria/{id}', [APICamisetaController::class, 'getCamisetasByCategoria']);
+    Route::get('/camisetas/categoria/{categoria}', [APICamisetaController::class, 'getCamisetasByCategoria']);
 
     /**
      * Categorias

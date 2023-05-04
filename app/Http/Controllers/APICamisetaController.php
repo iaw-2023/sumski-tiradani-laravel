@@ -17,25 +17,37 @@ class APICamisetaController extends Controller
         $camisetas = Camiseta::all();
         $camisetas = $this->loadImages($camisetas);
 
+        foreach($camisetas as $camiseta){
+            $camiseta->categorias;
+            $camiseta->categorias->setHidden(['id', 'created_at', 'updated_at','pivot']); // format json
+        }
+
+        $camisetas->setHidden(['id', 'created_at', 'updated_at', 'deleted_at', 'pivot']); // format json
         return response()->json($camisetas);
     }
 
-    public function getCamisetasByCategoria(string $id)
+    public function getCamisetasByCategoria(string $categoria)
     {
-        $validator = Validator::make(['id' => $id], ['id' => 'integer',]);
+        $validator = Validator::make(['categoria' => $categoria], ['categoria' => 'string']);
 
         if ($validator->fails()) {
-            return response('El ID de la categoría tiene que ser un valor entero', 400);
+            return response('El nombre de la categoría tiene que ser valido', 400);
         }
 
-        $categoria = Categoria::find($id);
-        if ($categoria == null) {
-            return response('No existe categoría con ID ' . $id, 404);
+        $categoria_obj = Categoria::where('name',$categoria)->first();
+        if ($categoria_obj == null) {
+            return response('No existe categoría con nombre ' . $categoria, 404);
         }
 
-        $camisetas = $categoria->camisetas;
+        $camisetas = $categoria_obj->camisetas;
         $camisetas = $this->loadImages($camisetas);
 
+        foreach($camisetas as $camiseta){
+            $camiseta->categorias;
+            $camiseta->categorias->setHidden(['id', 'created_at', 'updated_at','pivot']); // format json
+        }
+
+        $camisetas->setHidden(['id', 'created_at', 'updated_at', 'deleted_at', 'pivot']); // format json
         return response()->json($camisetas);
     }
 
