@@ -64,20 +64,14 @@ Route::middleware('auth')->group(function () {
 
 // Rutas de API para que anden en Vercel
 Route::prefix('_api')->group(function () {
-    /**
-     * Camisetas
-     */
+    //Camisetas
     Route::get('/camisetas', [APICamisetaController::class, 'getCamisetas']);
     Route::get('/camisetas/categoria/{categoria}', [APICamisetaController::class, 'getCamisetasByCategoria']);
 
-    /**
-     * Categorias
-     */
+    //Categorias
     Route::get('/categorias', [APICategoriaController::class, 'getCategorias']);
 
-    /**
-     * Cliente/Compras
-     */
+    //Cliente/Compras
     Route::get('/compras/{email}', [APICompraController::class, 'getComprasByCliente']);
     Route::post('/comprar', [APICompraController::class, 'createCompra']);
 });

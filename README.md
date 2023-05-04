@@ -1,3 +1,91 @@
+# Proyecto Framework PHP - Laravel Sumski-Tiradani
+
+#### ⚽TuCasaca.com⚽
+
+En este proyecto logramos implementar una aplicación web de ABM para manejar nuestros productos, la información de nuestros clientes y las compras.
+
+A su vez, presentamos una API REST para luego en el proyecto 3 poder armar una aplicación web que permita ver y comprar productos.
+
+### Links
+
+-   [Deploy en Vercel](https://tucasaca-laravel-iamjuanpy-sumski-tiradani.vercel.app/)
+-   [Swagger UI]()
+
+### Aclaraciones pertinentes
+
+-   Para la opción de eliminar un producto tenemos dos alternativas, cambiando el valor de la columna _Activo_, permitiendonos recuperarla de manera inmediata, simulando una noción de stock. La otra opción es un borrado _"permanente"_ que utiliza el SoftDelete de Eloquent para no perder la información que corresponde a la tabla de Pedidos que puede tener camisetas borradas anteriormente.
+
+-   Las rutas **/api/..** en Vercel no funcionan puesto que las usa, por lo que todas las consultas a la API son a **/\_api/**
+
+### Ejemplos para probar la API
+
+_Ver documentación de Swagger para mas información_
+
+##### GET /camisetas
+
+-   Retorna todas las camisetas en un array JSON
+
+##### GET /camisetas/categoria/{categoria}
+
+-   Probar con **/River** y con **/Argentina** para ver camisetas por categoría y ver que se puede ver la misma Camiseta en distintas, debería retornar
+
+##### GET /categorias
+
+-   Retorna todas las categorías en un array JSON
+
+##### GET /compras/{email}
+
+-   Probar con **ematiradani@gmail.com** o **juanpy@hotmail.com** y debería mostrar un array JSON que muestre todas las compras con los pedidos.
+
+##### POST /comprar
+
+-   Probar con:
+
+```json
+{
+    "cliente": "ematiradani@gmail.com",
+    "forma_de_pago": "VISA XXXX 0700",
+    "direccion_de_entrega": "Peru 100",
+    "pedidos": [
+        {
+            "nombre_camiseta": "Camiseta Titular Argentina",
+            "nombre_a_estampar": "Ema",
+            "numero_a_estampar": "10",
+            "talle_elegido": "L"
+        },
+        {
+            "nombre_camiseta": "Camiseta Titular Boca",
+            "nombre_a_estampar": "Juanpy",
+            "numero_a_estampar": "23",
+            "talle_elegido": "M"
+        }
+    ]
+}
+```
+
+### Librerías/herramientas utilizadas
+
+-   **JQuery:** librería de JavaScript utilizada por dos plugins.
+    [_Sitio Oficial_](https://jquery.com/)
+
+<br>
+
+-   **Datatables:** es un plugin de JQuery, que utilizamos para crear las tablas de la aplicación web de manera sencilla con ordenamiento y búsqueda.
+    [_Sitio Oficial_](https://datatables.net/)
+
+<br>
+
+-   **Selectize:** otro plugin de JQuery, que utilizamos para tener el campo de categorías en la creación o edición de Camisetas con autocompletado y que no permita poner repetidos.
+    [_Sitio Oficial_](https://selectize.dev/)
+
+<br>
+
+-   **Bootstrap w/Bootstrap-Icons:** librería para simplificar la tarea de crear estilos, de la cual sacamos componentes con estilos ya predefinidos.
+    Además utilizamos íconos de la misma y aprovechando JQuery, logramos un look mejorado para los tooltips de los botones con íconos de las tablas
+    [_Sitio Oficial_](https://getbootstrap.com/)
+
+---
+
 # Proyecto Inicial Sumski-Tiradani
 
 ### Idea a implementar
