@@ -15,45 +15,105 @@ class APICompraController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     * path="/_api/compras/{email}",
+     * tags={"Compras"},
+     * summary="Retorna todas las compras con sus pedidos que pertenezcan a un cliente",
+     * @OA\Parameter(
+     *      name="email",
+     *      in="path",
+     *      description="Email de cliente del cual recuperar sus compras",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="string",
+     *      )
+     * ),
+     * @OA\Response(
+     *      response=200,
+     *      description="OK",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(ref="#/components/schemas/Compra")           
+     *      )
+     * ),
+     * @OA\Response(
+     *      response=422,
+     *      description="Error: Unprocessable Content",
+     *      @OA\MediaType(
+     *          mediaType="text/html",
+     *          example="No existe cliente con email holanoexisto@ea.com"
+     *      )   
+     * )
+     * )
      */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
     public function getComprasByCliente(string $email)
     {
         $validator = Validator::make(['email' => $email], ['email' => 'required|email',]);
 
         if ($validator->fails()) {
-            return response('Se requiere un email válido', 400);
+            return response('Se requiere un email válido', 422);
         }
 
         $cliente = Cliente::where('email', $email)->first();
         if ($cliente == null) {
-            return response('No existe cliente con email ' . $email, 404);
+            return response('No existe cliente con email ' . $email, 422);
         }
         $compras = $cliente->compras;
 
         foreach ($compras as $compra) {
             foreach($compra->pedidos as $pedido){
-                $pedido->camiseta_id = Camiseta::where('id',$pedido->camiseta_id)->first()->nombre;
+                $pedido->camiseta_id = Camiseta::where('id',$pedido->camiseta_id)->withTrashed()->first()->nombre;
             }
+            $compra->pedidos->setHidden(['id', 'compra_id', 'created_at', 'updated_at','pivot']);
             $compra->pedidos->toJson();
         }
 
+        $compras->setHidden(['id', 'cliente_id', 'created_at', 'updated_at']);
         return response()->json($compras);
     }
 
+    /**
+     * @OA\Post(
+     * path="/_api/comprar",
+     * summary="Realiza una compra con sus pedidos",
+     * tags={"Compras"},
+     * @OA\RequestBody(
+     *     required = true,
+     *     @OA\JsonContent(
+     *          required={"cliente","forma_de_pago","direccion_de_entrega","pedidos"},
+     *          @OA\Property(property="cliente",type="string",example="ematiradani@gmail.com"),
+     *          @OA\Property(property="forma_de_pago",type="string",example="Tarjeta Visa"),
+     *          @OA\Property(property="direccion_de_entrega",type="string",example="Av Alem y San Juan"),
+     *          @OA\Property(property="pedidos",type="array",
+     *              @OA\Items(
+     *                  type="object",
+     *                  @OA\Property(property="nombre_camiseta",type="string",example="Camiseta Titular Boca"),
+     *                  @OA\Property(property="nombre_a_estampar",type="string",example="Ema"),
+     *                  @OA\Property(property="numero_a_estampar",type="string",example="10"),
+     *                  @OA\Property(property="talle_elegido",type="string",example="S")
+     *              )
+     *          )
+     *     )
+     * ),
+     * @OA\Response(
+     *      response=200,
+     *      description="OK",
+     *      @OA\JsonContent(
+     *      type="string",
+     *      example="Compra realizada con éxito"          
+     *      )
+     * ),
+     * @OA\Response(
+     *      response=422,
+     *      description="Error: Unprocessable Content",
+     *      @OA\JsonContent(
+     *          type="object",
+     *          @OA\Property(property="message",type="string",example="Un pedido debe contener un nombre_camiseta: valido, no eliminado y en stock") ,
+     *          @OA\Property(property="errors",type="object", example="cliente: [mensajes de error en parametro cliente], forma_de_pago: [mensajes de error...]...")      
+     *      )   
+     * )
+     * )
+     */
     public function createCompra(Request $request)
     {
         $request->validate(
@@ -124,20 +184,4 @@ class APICompraController extends Controller
         return response("Compra realizada con exito", 200);
     }
     
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

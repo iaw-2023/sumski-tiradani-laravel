@@ -10,7 +10,19 @@ use App\Models\Camiseta;
 class APICamisetaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     * path="/_api/camisetas",
+     * tags={"Camisetas"},
+     * summary="Retorna todas las camisetas",
+     * @OA\Response(
+     *      response=200,
+     *      description="OK",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(ref="#/components/schemas/Camiseta")           
+     *      )
+     * )
+     * )
      */
     public function getCamisetas()
     {
@@ -26,17 +38,50 @@ class APICamisetaController extends Controller
         return response()->json($camisetas);
     }
 
+    /**
+     * @OA\Get(
+     * path="/_api/camisetas/categoria/{categoria}",
+     * tags={"Camisetas"},
+     * summary="Retorna todas las camisetas que pertenezcan a una categoria",
+     * @OA\Parameter(
+     *      name="categoria",
+     *      in="path",
+     *      description="Nombre de categoria a obtener camisetas",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="string",
+     *          example="Selecciones"
+     *      )
+     * ),
+     * @OA\Response(
+     *      response=200,
+     *      description="OK",
+     *      @OA\JsonContent(
+     *          type="array",
+     *          @OA\Items(ref="#/components/schemas/Camiseta")           
+     *      )
+     * ),
+     * @OA\Response(
+     *      response=422,
+     *      description="Error: Unprocessable Content",
+     *      @OA\MediaType(
+     *          mediaType="text/html",
+     *          example="El nombre de la categoría tiene que ser valido"
+     *      )   
+     * )
+     * )
+     */
     public function getCamisetasByCategoria(string $categoria)
     {
         $validator = Validator::make(['categoria' => $categoria], ['categoria' => 'string']);
 
         if ($validator->fails()) {
-            return response('El nombre de la categoría tiene que ser valido', 400);
+            return response('El nombre de la categoría tiene que ser valido', 422);
         }
 
         $categoria_obj = Categoria::where('name',$categoria)->first();
         if ($categoria_obj == null) {
-            return response('No existe categoría con nombre ' . $categoria, 404);
+            return response('No existe categoría con nombre ' . $categoria, 422);
         }
 
         $camisetas = $categoria_obj->camisetas;
@@ -60,35 +105,4 @@ class APICamisetaController extends Controller
         return $camisetas;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
