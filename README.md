@@ -1,3 +1,122 @@
+# Proyecto Framework PHP - Laravel Sumski-Tiradani
+
+#### ⚽TuCasaca.com⚽
+
+En este proyecto logramos implementar una aplicación web de ABM para manejar nuestros productos, la información de nuestros clientes y las compras.
+
+A su vez, presentamos una API REST para luego en el proyecto 3 poder armar una aplicación web que permita ver y comprar productos.
+
+### Links
+
+-   [Deploy en Vercel](https://tucasaca-laravel-git-entrega2-sumski-tiradani.vercel.app/)
+-   [Swagger UI](https://tucasaca-laravel-git-entrega2-sumski-tiradani.vercel.app/_api/documentation)
+
+### Aclaraciones pertinentes
+
+-   Para la opción de eliminar un producto tenemos dos alternativas, cambiando el valor de la columna _Activo_, permitiendonos recuperarla de manera inmediata, simulando una noción de stock. La otra opción es un borrado _"permanente"_ que utiliza el SoftDelete de Eloquent para no perder la información que corresponde a la tabla de Pedidos que puede tener camisetas borradas anteriormente.
+
+-   Se hicieron algunos ajustes al diagrama ER, como el agregado de la columna de ACTIVO, y además el agregado de un precio a la entidad Pedido, para tener el precio que se pagó en el momento de hacer la compra no atado al último precio que tenga el producto comprado.
+
+-   Las rutas **/api/..** en Vercel no funcionan puesto que usa esa dirección, por lo que todas las consultas a la API son a **/\_api/**
+
+### Ejemplos para probar la API
+
+_Ver documentación de Swagger para mas información_
+
+##### GET /camisetas
+
+-   Retorna todas las camisetas en un array.
+
+-   Decidimos que las camisetas fuera de stock las muestre tambien, pero que no se puedan comprar.
+
+##### GET /camisetas/categoria/{categoria}
+
+-   Retorna todas las camisetas que pertenezcan a la categoría por parámetro en un array.
+
+-   Probar con **/River** y con **/Argentina** para ver camisetas por categoría y ver que se puede ver la misma Camiseta en distintas consultas.
+
+##### GET /categorias
+
+-   Retorna los nombres de todas las categorías en un array.
+
+##### GET /compras/{email}
+
+-   Retorna todas las compras con sus pedidos de determinado cliente, pasando su dirección de correo como parámetro.
+
+-   Probar con **ematiradani@gmail.com** o **juanpy@hotmail.com** y debería mostrar un array JSON que muestre todas las compras con los pedidos.
+
+##### POST /comprar
+
+-   Permite registrar una compra usando un objecto JSON como cuerpo de la solicitud con un determinado formato.
+
+-   Probar con:
+
+```json
+{
+    "cliente": "ematiradani@gmail.com",
+    "forma_de_pago": "VISA XXXX 0700",
+    "direccion_de_entrega": "Peru 100",
+    "pedidos": [
+        {
+            "nombre_camiseta": "Camiseta Titular Argentina",
+            "nombre_a_estampar": "Ema",
+            "numero_a_estampar": "10",
+            "talle_elegido": "L"
+        },
+        {
+            "nombre_camiseta": "Camiseta Titular Boca",
+            "nombre_a_estampar": "Juanpy",
+            "numero_a_estampar": "23",
+            "talle_elegido": "M"
+        }
+    ]
+}
+```
+
+-   Para probar los mensajes de error y de validación, se puede probar borrando una camiseta o sacandola de stock y luego tratar de comprarla, eligiendo un talle inexistente o ingresando mal cualquiera de los otros campos.
+
+### Herramientas y Librerías utilizadas
+
+-   **Blade, Breeze y Eloquent:** herramientas que forman parte del framework Laravel, utilizadas para poder crear vistas a partir de templates, tener un sistema de login y poder abstraernos de la base de datos respectivamente
+
+<br>
+
+-   **Vercel:** sitio web para hacer el deploy de nuestra aplicación de manera gratuita
+    [_Sitio Oficial_](https://vercel.com)
+    <br>
+
+-   **Supabase:** sitio web que hostea nuestra base de datos PostgreSQL
+    [_Sitio Oficial_](https://app.supabase.com)
+
+<br>
+
+-   **JQuery:** librería de JavaScript utilizada por dos plugins.
+    [_Sitio Oficial_](https://jquery.com/)
+
+<br>
+
+-   **Datatables:** es un plugin de JQuery, que utilizamos para crear las tablas de la aplicación web de manera sencilla con ordenamiento y búsqueda.
+    [_Sitio Oficial_](https://datatables.net/)
+
+<br>
+
+-   **Selectize:** otro plugin de JQuery, que utilizamos para tener el campo de categorías en la creación o edición de Camisetas con autocompletado y que no permita poner repetidos.
+    [_Sitio Oficial_](https://selectize.dev/)
+
+<br>
+
+-   **Bootstrap w/Bootstrap-Icons:** librería para simplificar la tarea de crear estilos, de la cual sacamos componentes con estilos ya predefinidos.
+    Además utilizamos íconos de la misma y aprovechando JQuery, logramos un look mejorado para los tooltips de los botones con íconos de las tablas
+    [_Sitio Oficial_](https://getbootstrap.com/)
+
+<br>
+
+-   **L5-Swagger:** librería para a partir de anotaciones en el código php generar la documentación de la API en Swagger.
+    [_Repositorio Github_](https://github.com/DarkaOnLine/L5-Swagger)
+    [_Especificación del estándar_](https://swagger.io/specification/)
+
+---
+
 # Proyecto Inicial Sumski-Tiradani
 
 ### Idea a implementar
@@ -10,7 +129,7 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
 
 ### Diagrama ER
 
-![Diagrama entidad-relacion inicial](https://i.imgur.com/zSVUewE.png)
+![Diagrama entidad-relacion inicial](https://i.imgur.com/NAQeRRM.png)
 
 -   **Categoría**
 
@@ -21,12 +140,14 @@ Nuestra idea es implementar un sitio web de venta de camisetas de futbol donde l
     -   El producto a vender, caracterizado por un _identificador_, un _nombre_ y _descripción_, un _precio_ y los _talles existentes_.
     -   Además contiene una **imágen** del _frente_ y el _dorso_ de la camiseta.
     -   Pertenece a **una o varias** _categorías_.
+    -   Puede estar **Activa o no**, esto simplifica la idea de stock, que debería ser manejado a mano por el dueño de la tienda.
 
 -   **Pedido**
 
     -   Un pedido está asociado a **una** camiseta en específico.
     -   Pertenece a **una** compra.
     -   Tiene como atributos un _talle elegido_ y una posible personalización con un _número y nombre a estampar_.
+    -   Además tiene _precio_ para conservar el valor pagado a pesar de modificaciones del precio del producto.
 
 -   **Compra**
 
