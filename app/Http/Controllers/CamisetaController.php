@@ -65,12 +65,12 @@ class CamisetaController extends Controller
     {
         $request->validate(
             [
-                'nombre' => ['required', 'regex:/^[a-zA-Z0-9\s\/]+$/', 'unique:camisetas,nombre'],
-                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9\s\/]+$/'],
+                'nombre' => ['required', 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\/]+$/', 'unique:camisetas,nombre'],
+                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\/]+$/'],
                 'precio' => ["required", 'decimal:0,2', 'min:0'],
                 'talles' => ["required", "array", "min:1"],
                 'tags' => ["required", "array", "min:1"],
-                'tags.*' => ['regex:/^[a-zA-Z\s]+$/'],
+                'tags.*' => ['regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
                 'imagen_frente' => ["required", "image"],
                 'imagen_atras' => ["required", "image"],
             ],
@@ -183,12 +183,12 @@ class CamisetaController extends Controller
         // valida campos form
         $request->validate(
             [
-                'nombre' => ['required', 'regex:/^[a-zA-Z0-9\s\/]+$/', Rule::unique('camisetas', 'nombre')->ignore($id)],
-                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9\s\/]+$/'],
+                'nombre' => ['required', 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\/]+$/', Rule::unique('camisetas', 'nombre')->ignore($id)],
+                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\/]+$/'],
                 'precio' => ["required", 'decimal:0,2', 'min:1'],
                 'talles' => ["required", "array", "min:1"],
                 'tags' => ["required", "array", "min:1"],
-                'tags.*' => ['regex:/^[a-zA-Z0-9\s]+$/'],
+                'tags.*' => ['regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
                 'imagen_atras' => ["nullable", "image"],
                 'imagen_frente' => ["nullable", "image"],
             ],

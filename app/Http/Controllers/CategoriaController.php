@@ -32,7 +32,7 @@ class CategoriaController extends Controller
     {
         $request->validate(
             [
-                'nombre' => ['required', 'regex:/^[a-zA-Z\s]+$/', 'unique:categorias,name'],
+                'nombre' => ['required', 'regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/', 'unique:categorias,name'],
             ],
             [
                 'nombre.required' => 'Una categoría debe tener nombre',
