@@ -96,7 +96,7 @@
                             @enderror
                             <br>
 
-                            <button type="submit" class="btn btn-outline-success">Actualizar camiseta</button>
+                            <button type="submit" class="btn btn-outline-success">Guardar</button>
                             <a href="/camisetas" class="btn btn-outline-danger" role="button" aria-disabled="true">Cancelar</a>
                         </div>
                     </div>
