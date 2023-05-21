@@ -7,7 +7,7 @@
                 <div class='container'>
                     <div class='row'>
                         <div class="col-sm" align-content: normal;>
-                            <div class="card text-white bg-warning mb-3 mx-auto" style="width: 18rem;" >
+                            <div class="card text-white bg-warning mb-3 mx-auto home-card">
                                 <div class="card-body">
                                     <h5 class="card-title">Camisetas activas</h5>
                                     <p class="card-text">{{$activas}}</p>
@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="col-sm">
-                            <div class="card text-white bg-primary mb-3 mx-auto" style="width: 18rem;">
+                            <div class="card text-white bg-primary mb-3 mx-auto home-card">
                                 
                                 <div class="card-body">
                                     <h5 class="card-title">Pedidos totales</h5>
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="col-sm">
-                            <div class="card text-white bg-info mb-3 mx-auto" style="width: 18rem;">
+                            <div class="card text-white bg-info mb-3 mx-auto home-card">
                                 <div class="card-body">
                                     <h5 class="card-title">Clientes totales</h5>
                                     <p class="card-text">{{$clientes}}</p>

@@ -11,7 +11,7 @@
       <hr><br>
       <h3>Compras realizadas</h3><br>
       @include('components.alert.success')
-      <table id="comprasTable" class="display" style="width: 100%">
+      <table id="comprasTable" class="display">
         <thead>
             <tr>
               <th>ID</th>
