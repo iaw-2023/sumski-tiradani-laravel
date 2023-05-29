@@ -8,10 +8,10 @@ A su vez, presentamos una API REST para luego en el proyecto 3 poder armar una a
 
 ### Correcciones realizadas
 
-❌ Inline Styling
-❌ Precio Negativo
-💡 Botón en inglés
-⚠️ Permitir acentos y Ñ en **Categoría**, no se pedía hacer este cambio en **Camisetas** o en nombre_a_estampar de **Pedido** pero se hizo también para mantener uniformidad.
+-   ❌ Inline Styling
+-   ❌ Precio Negativo
+-   💡 Botón en inglés
+-   ⚠️ Permitir acentos y Ñ en **Categoría**, no se pedía hacer este cambio en **Camisetas** o en nombre_a_estampar de **Pedido** pero se hizo también para mantener uniformidad.
 
 ### Links
 
