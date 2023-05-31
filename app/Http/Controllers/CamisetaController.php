@@ -66,7 +66,7 @@ class CamisetaController extends Controller
         $request->validate(
             [
                 'nombre' => ['required', 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\/]+$/', 'unique:camisetas,nombre'],
-                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\/]+$/'],
+                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.,\s\/]+$/'],
                 'precio' => ["required", 'decimal:0,2', 'min:0'],
                 'talles' => ["required", "array", "min:1"],
                 'tags' => ["required", "array", "min:1"],
@@ -184,7 +184,7 @@ class CamisetaController extends Controller
         $request->validate(
             [
                 'nombre' => ['required', 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\/]+$/', Rule::unique('camisetas', 'nombre')->ignore($id)],
-                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\/]+$/'],
+                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.,\s\/]+$/'],
                 'precio' => ["required", 'decimal:0,2', 'min:1'],
                 'talles' => ["required", "array", "min:1"],
                 'tags' => ["required", "array", "min:1"],
