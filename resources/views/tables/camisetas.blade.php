@@ -12,7 +12,7 @@
       @endif
       @include('components.alert.success')
       @include('components.alert.deleted')
-      <table id="camisetasTable" class="display" style="width: 100%">
+      <table id="camisetasTable" class="display">
         <thead>
             <tr>
               <th>ID</th>

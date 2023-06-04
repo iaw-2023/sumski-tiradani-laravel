@@ -27,7 +27,7 @@
       <hr>
       <div>
         <h3>Detalle con todos los pedidos</h3><br>
-        <table id="pedidosTable" class="display" style="width: 100%">
+        <table id="pedidosTable" class="display">
         <thead>
             <tr>
               <th>Cód Producto</th>

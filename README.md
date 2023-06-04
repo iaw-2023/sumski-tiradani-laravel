@@ -6,12 +6,21 @@ En este proyecto logramos implementar una aplicación web de ABM para manejar nu
 
 A su vez, presentamos una API REST para luego en el proyecto 3 poder armar una aplicación web que permita ver y comprar productos.
 
+### Correcciones realizadas
+
+-   ❌ Inline Styling
+-   ❌ Precio Negativo
+-   💡 Botón en inglés
+-   ⚠️ Permitir acentos y Ñ en **Categoría**, no se pedía hacer este cambio en **Camisetas** o en nombre_a_estampar de **Pedido** pero se hizo también para mantener uniformidad. En **Camisetas** se permite comas y puntos en la descripción.
+
 ### Links
 
--   [Deploy en Vercel](https://tucasaca-laravel-git-entrega2-sumski-tiradani.vercel.app/)
--   [Swagger UI](https://tucasaca-laravel-git-entrega2-sumski-tiradani.vercel.app/_api/documentation)
+-   [Deploy en Vercel](https://tucasaca-laravel-iamjuanpy.vercel.app/)
+-   [Swagger UI](https://tucasaca-laravel-iamjuanpy.vercel.app/_api/documentation)
 
 ### Aclaraciones pertinentes
+
+-   El deploy no está conectado a github porque se acabó la prueba de 15 días.
 
 -   Para la opción de eliminar un producto tenemos dos alternativas, cambiando el valor de la columna _Activo_, permitiendonos recuperarla de manera inmediata, simulando una noción de stock. La otra opción es un borrado _"permanente"_ que utiliza el SoftDelete de Eloquent para no perder la información que corresponde a la tabla de Pedidos que puede tener camisetas borradas anteriormente.
 

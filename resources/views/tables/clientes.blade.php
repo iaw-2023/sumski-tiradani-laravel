@@ -4,7 +4,7 @@
     <div class="bg-white shadow p-3 rounded-lg"> 
       <h1>Clientes</h1>
       <hr><br>
-      <table id="clientesTable" class="display" style="width: 100%">
+      <table id="clientesTable" class="display" >
         <thead>
             <tr>
               <th>ID</th>

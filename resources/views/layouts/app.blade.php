@@ -34,7 +34,7 @@
 
             <!-- Page Content -->
             <main>
-                <div style="width:85%; margin:auto; margin-top: 3%">
+                <div class="page-content">
                     @yield('content')
                 </div>
             </main>

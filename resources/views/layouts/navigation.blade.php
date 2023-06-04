@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a style="width:50px; height:50px" href="{{ route('home') }}">
+                    <a class="nav-logo" href="{{ route('home') }}">
                         <x-application-logo class="block text-gray-800"/>
                     </a>
                 </div>

@@ -122,8 +122,8 @@ class APICompraController extends Controller
                 'forma_de_pago' => ['required', 'string'],
                 'direccion_de_entrega' => ['required', 'string'],
                 'pedidos' => ['required', 'array','min:1'],
-                'pedidos.*.nombre_camiseta' => ['required', 'regex:/^[a-zA-Z0-9\s\/]+$/', Rule::exists('camisetas', 'nombre')->where('activo',1)],
-                'pedidos.*.nombre_a_estampar' => ['required','regex:/^[a-zA-Z\s]+$/'],
+                'pedidos.*.nombre_camiseta' => ['required', 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\/]+$/', Rule::exists('camisetas', 'nombre')->where('activo',1)],
+                'pedidos.*.nombre_a_estampar' => ['required','regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
                 'pedidos.*.numero_a_estampar' => ['required','regex:/^[0-9]+$/'],
                 'pedidos.*.talle_elegido' => ['required']
             ],

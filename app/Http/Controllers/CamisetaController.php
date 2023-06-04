@@ -65,12 +65,12 @@ class CamisetaController extends Controller
     {
         $request->validate(
             [
-                'nombre' => ['required', 'regex:/^[a-zA-Z0-9\s\/]+$/', 'unique:camisetas,nombre'],
-                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9\s\/]+$/'],
-                'precio' => ["required", 'decimal:0,2'],
+                'nombre' => ['required', 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\/]+$/', 'unique:camisetas,nombre'],
+                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.,\s\/]+$/'],
+                'precio' => ["required", 'decimal:0,2', 'min:0'],
                 'talles' => ["required", "array", "min:1"],
                 'tags' => ["required", "array", "min:1"],
-                'tags.*' => ['regex:/^[a-zA-Z\s]+$/'],
+                'tags.*' => ['regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
                 'imagen_frente' => ["required", "image"],
                 'imagen_atras' => ["required", "image"],
             ],
@@ -81,7 +81,8 @@ class CamisetaController extends Controller
                 'descripcion.required' => 'Este campo no puede estar vacío',
                 'descripcion.regex' => 'Este campo no puedo contener caracteres especiales',
                 'precio.required' => 'Este campo no puede estar vacío',
-                'precio' => 'El precio debe ser un numero decimal, con maximo 2 cifras de centavos',
+                'precio.min' => 'El precio no puede ser negativo',
+                'precio' => 'El precio debe ser un numero decimal positivo, con maximo 2 cifras de centavos',
                 'talles.required' => 'La camiseta debe tener al menos un talle',
                 'tags.required' => 'Completar con al menos una categoría',
                 'tags.*.regex' => 'Una categoría no puede tener caracteres especiales o números',
@@ -182,12 +183,12 @@ class CamisetaController extends Controller
         // valida campos form
         $request->validate(
             [
-                'nombre' => ['required', 'regex:/^[a-zA-Z0-9\s\/]+$/', Rule::unique('camisetas', 'nombre')->ignore($id)],
-                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9\s\/]+$/'],
-                'precio' => ["required", 'decimal:0,2'],
+                'nombre' => ['required', 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\/]+$/', Rule::unique('camisetas', 'nombre')->ignore($id)],
+                'descripcion' => ["required", 'regex:/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.,\s\/]+$/'],
+                'precio' => ["required", 'decimal:0,2', 'min:1'],
                 'talles' => ["required", "array", "min:1"],
                 'tags' => ["required", "array", "min:1"],
-                'tags.*' => ['regex:/^[a-zA-Z0-9\s]+$/'],
+                'tags.*' => ['regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/'],
                 'imagen_atras' => ["nullable", "image"],
                 'imagen_frente' => ["nullable", "image"],
             ],
@@ -198,7 +199,8 @@ class CamisetaController extends Controller
                 'descripcion.required' => 'Este campo no puede estar vacío',
                 'descripcion.regex' => 'Este campo no puedo contener caracteres especiales',
                 'precio.required' => 'Este campo no puede estar vacío',
-                'precio' => 'El precio debe ser un numero decimal, con maximo 2 cifras de centavos',
+                'precio.min' => 'El precio no puede ser negativo',
+                'precio' => 'El precio debe ser un numero decimal positivo, con maximo 2 cifras de centavos',
                 'talles.required' => 'La camiseta debe tener al menos un talle',
                 'tags.required' => 'Completar con al menos una categoría',
                 'tags.*.regex' => 'Una categoría no puede tener caracteres especiales o números',
