@@ -10,6 +10,9 @@ use App\Models\Pedido;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
+use Auth0\SDK\Auth0;
+use Auth0\SDK\Configuration\SdkConfiguration;
+use Auth0\SDK\Exception\InvalidTokenException;
 
 class APICompraController extends Controller
 {
@@ -37,16 +40,12 @@ class APICompraController extends Controller
      *      )
      * ),
      * @OA\Response(
-     *      response=422,
-     *      description="Error: Unprocessable Content",
-     *      @OA\MediaType(
-     *          mediaType="text/html",
-     *          example="No existe cliente con email holanoexisto@ea.com"
-     *      )   
+     *      response=401,
+     *      description="No Autorizado"
      * )
      * )
      */
-    public function getComprasByCliente(string $email)
+    public function getComprasByCliente(Request $request, string $email)
     {
         $validator = Validator::make(['email' => $email], ['email' => 'required|email',]);
 
@@ -54,9 +53,39 @@ class APICompraController extends Controller
             return response('Se requiere un email válido', 422);
         }
 
+        $auth0 = new Auth0([
+            'strategy' => SdkConfiguration::STRATEGY_API,
+            'domain' => env('AUTH0_DOMAIN'),
+            'clientId' => env('AUTH0_CLIENT_ID'),
+            'clientSecret' => env('AUTH0_CLIENT_SECRET'),
+            'audience' => [env('AUTH0_AUDIENCE')]
+        ]);
+
+        $token = $request->bearerToken();
+        if ($token == null){ 
+            return response("No Autorizado",401); // Si no tiene token, no está autorizado
+        } else {
+            try {
+                $token = $auth0->decode($token);
+                $tokenClaims = $token->toArray();
+                $tokenEmail = $tokenClaims['claims/email'];
+                
+                if ($tokenEmail == null) {
+                    return response("No Autorizado",401); // Si el token es valido pero no tiene mail, no está autorizado
+                } else if ($tokenEmail != $email) {
+                    return response("No Autorizado",401); // Si el token tiene mail, pero el mail que se pide no coincide, no está autorizado
+                }
+
+            } catch (InvalidTokenException $exception) {
+                return response("No Autorizado", 401); // Si el token no es válido, no está autorizado
+            }
+        }
+
         $cliente = Cliente::where('email', $email)->first();
-        if ($cliente == null) {
-            return response('No existe cliente con email ' . $email, 422);
+        if ($cliente == null) { // Si el cliente existe en auth0 pero no en nuestra base, lo creamos
+            $cliente = new Cliente();
+            $cliente->email = $mail;
+            $cliente->save();
         }
         $compras = $cliente->compras;
 
