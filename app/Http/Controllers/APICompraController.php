@@ -41,7 +41,7 @@ class APICompraController extends Controller
      * ),
      * @OA\Response(
      *      response=401,
-     *      description="No Autorizado"
+     *      description="Error: Unauthorized"
      * )
      * )
      */
@@ -63,7 +63,7 @@ class APICompraController extends Controller
 
         $token = $request->bearerToken();
         if ($token == null){ 
-            return response("No Autorizado",401); // Si no tiene token, no está autorizado
+            return response("Error: No Autorizado",401); // Si no tiene token, no está autorizado
         } else {
             try {
                 $token = $auth0->decode($token);
@@ -71,13 +71,13 @@ class APICompraController extends Controller
                 $tokenEmail = $tokenClaims['claims/email'];
                 
                 if ($tokenEmail == null) {
-                    return response("No Autorizado",401); // Si el token es valido pero no tiene mail, no está autorizado
+                    return response("Error: No Autorizado",401); // Si el token es valido pero no tiene mail, no está autorizado
                 } else if ($tokenEmail != $email) {
-                    return response("No Autorizado",401); // Si el token tiene mail, pero el mail que se pide no coincide, no está autorizado
+                    return response("Error: No Autorizado",401); // Si el token tiene mail, pero el mail que se pide no coincide, no está autorizado
                 }
 
             } catch (InvalidTokenException $exception) {
-                return response("No Autorizado", 401); // Si el token no es válido, no está autorizado
+                return response("Error: No Autorizado", 401); // Si el token no es válido, no está autorizado
             }
         }
 
@@ -133,6 +133,10 @@ class APICompraController extends Controller
      *      )
      * ),
      * @OA\Response(
+     *      response=401,
+     *      description="Error: Unauthorized"
+     * ),
+     * @OA\Response(
      *      response=422,
      *      description="Error: Unprocessable Content",
      *      @OA\JsonContent(
@@ -176,9 +180,37 @@ class APICompraController extends Controller
             }
         }
 
-        $compra = new Compra();
+        $auth0 = new Auth0([
+            'strategy' => SdkConfiguration::STRATEGY_API,
+            'domain' => env('AUTH0_DOMAIN'),
+            'clientId' => env('AUTH0_CLIENT_ID'),
+            'clientSecret' => env('AUTH0_CLIENT_SECRET'),
+            'audience' => [env('AUTH0_AUDIENCE')]
+        ]);
 
+        $token = $request->bearerToken();
         $mail = $request->get('cliente');
+
+        if ($token == null){ 
+            return response("Error: No Autorizado",401); // Si no tiene token, no está autorizado
+        } else {
+            try {
+                $token = $auth0->decode($token);
+                $tokenClaims = $token->toArray();
+                $tokenEmail = $tokenClaims['claims/email'];
+                
+                if ($tokenEmail == null) {
+                    return response("Error: No Autorizado",401); // Si el token es valido pero no tiene mail, no está autorizado
+                } else if ($tokenEmail != $mail) {
+                    return response("Error: No Autorizado",401); // Si el token tiene mail, pero el mail que se pide no coincide, no está autorizado
+                }
+
+            } catch (InvalidTokenException $exception) {
+                return response("Error: No Autorizado", 401); // Si el token no es válido, no está autorizado
+            }
+        }
+
+        $compra = new Compra();
         $comprador = Cliente::where('email', $mail)->first();
         if ($comprador == null) {
             $comprador = new Cliente();

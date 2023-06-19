@@ -129,13 +129,8 @@
                             }
                         }
                     },
-                    "422": {
-                        "description": "Error: Unprocessable Content",
-                        "content": {
-                            "text/html": {
-                                "example": "No existe cliente con email holanoexisto@ea.com"
-                            }
-                        }
+                    "401": {
+                        "description": "Error: Unauthorized"
                     }
                 }
             }
@@ -212,6 +207,9 @@
                                 "example": "Compra realizada con éxito"
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Error: Unauthorized"
                     },
                     "422": {
                         "description": "Error: Unprocessable Content",
