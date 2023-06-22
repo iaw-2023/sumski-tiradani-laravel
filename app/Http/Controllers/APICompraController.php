@@ -101,6 +101,62 @@ class APICompraController extends Controller
         return response()->json($compras);
     }
 
+    public function autorizarPago(Request $request){
+        $auth0 = new Auth0([
+            'strategy' => SdkConfiguration::STRATEGY_API,
+            'domain' => env('AUTH0_DOMAIN'),
+            'clientId' => env('AUTH0_CLIENT_ID'),
+            'clientSecret' => env('AUTH0_CLIENT_SECRET'),
+            'audience' => [env('AUTH0_AUDIENCE')]
+        ]);
+
+        $token = $request->bearerToken();
+        $email = $request['payer']['email'];
+        if ($token == null){ 
+            return response("Error: No Autorizado",401); // Si no tiene token, no está autorizado
+        } else {
+            try {
+                $token = $auth0->decode($token);
+                $tokenClaims = $token->toArray();
+                $tokenEmail = $tokenClaims['claims/email'];
+                
+                if ($tokenEmail == null) {
+                    return response("Error: No Autorizado",401); // Si el token es valido pero no tiene mail, no está autorizado
+                } else if ($tokenEmail != $email) {
+                    return response("Error: No Autorizado",401); // Si el token tiene mail, pero el mail que se pide no coincide, no está autorizado
+                }
+
+            } catch (InvalidTokenException $exception) {
+                return response("Error: No Autorizado", 401); // Si el token no es válido, no está autorizado
+            }
+        }
+
+        \MercadoPago\SDK::setAccessToken(env("MP_ACCESS_TOKEN"));
+
+        $contents = $request;
+        $payment = new \MercadoPago\Payment();
+        $payment->transaction_amount = $contents['transaction_amount'];
+        $payment->token = $contents['token'];
+        $payment->installments = $contents['installments'];
+        $payment->payment_method_id = $contents['payment_method_id'];
+        $payment->issuer_id = $contents['issuer_id'];
+        $payer = new \MercadoPago\Payer();
+        $payer->email = $contents['payer']['email'];
+        $payer->identification = array(
+            "type" => $contents['payer']['identification']['type'],
+            "number" => $contents['payer']['identification']['number']
+        );
+        $payment->payer = $payer;
+        $payment->save();
+        $response = array(
+            'status' => $payment->status,
+            'status_detail' => $payment->status_detail,
+            'id' => $payment->id
+        );
+
+        return response()->json($response);
+    }
+
     /**
      * @OA\Post(
      * path="/_api/comprar",
