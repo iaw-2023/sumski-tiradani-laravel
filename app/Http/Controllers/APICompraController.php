@@ -84,7 +84,7 @@ class APICompraController extends Controller
         $cliente = Cliente::where('email', $email)->first();
         if ($cliente == null) { // Si el cliente existe en auth0 pero no en nuestra base, lo creamos
             $cliente = new Cliente();
-            $cliente->email = $mail;
+            $cliente->email = $email;
             $cliente->save();
         }
         $compras = $cliente->compras;
