@@ -135,6 +135,69 @@
                 }
             }
         },
+        "/_api/comprar/auth": {
+            "post": {
+                "tags": [
+                    "Compras"
+                ],
+                "summary": "Autoriza un pago",
+                "operationId": "3a2644b8192a85f812940c0e182cd7b6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "payer": {
+                                        "type": "object",
+                                        "example": "ematiradani@gmail.com"
+                                    },
+                                    "installments": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "transaction_amout": {
+                                        "type": "number",
+                                        "example": "100.50"
+                                    },
+                                    "token": {
+                                        "type": "string",
+                                        "example": "ff8080814c11e237014c1ff593b57b4d"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "accepted"
+                                        },
+                                        "status_detail": {
+                                            "type": "string",
+                                            "example": "accredited"
+                                        },
+                                        "id": {
+                                            "type": "number",
+                                            "example": "3055665"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/_api/comprar": {
             "post": {
                 "tags": [

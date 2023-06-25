@@ -101,6 +101,31 @@ class APICompraController extends Controller
         return response()->json($compras);
     }
 
+    /**
+     * @OA\Post(
+     * path="/_api/comprar/auth",
+     * summary="Autoriza un pago",
+     * tags={"Compras"},
+     * @OA\RequestBody(
+     *     required = true,
+     *     @OA\JsonContent(
+     *          @OA\Property(property="payer",type="object",example="ematiradani@gmail.com"),
+     *          @OA\Property(property="installments",type="number",example="1"),
+     *          @OA\Property(property="transaction_amout",type="number",example="100.50"),
+     *          @OA\Property(property="token",type="string",example="ff8080814c11e237014c1ff593b57b4d")
+     *     )
+     * ),
+     * @OA\Response(
+     *      response=200,
+     *      description="OK",
+     *      @OA\JsonContent(
+     *          @OA\Property(property="status", type="string", example="accepted"),         
+     *          @OA\Property(property="status_detail", type="string", example="accredited"),    
+     *          @OA\Property(property="id", type="number", example="3055665")  
+     *      )
+     * )
+     * )
+     */
     public function autorizarPago(Request $request){
         $auth0 = new Auth0([
             'strategy' => SdkConfiguration::STRATEGY_API,

@@ -21,6 +21,7 @@ Para alcanzar la promoción se implementaron las siguientes funcionalidades adic
     <br> &nbsp;
 -   **Accesibilidad**: nada modificado en el backend
 -   **Servicio Web en JS**: nada modificado en el backend
+-   **Servicio Web en Laravel**: procedimiento similar al de javascript, se solicita al ver un detalle de compra, información de la geolocalización de la dirección de entrega a Geoapify, para luego mostrar en un mapa Leaflet un puntero a la latitud y longitud recibida de la búsqueda.
 -   **Responsive en JS**: nada modificado en el backend
     <br> &nbsp;
 
@@ -143,6 +144,10 @@ _Ver documentación de Swagger para mas información_
 -   **L5-Swagger:** librería para a partir de anotaciones en el código php generar la documentación de la API en Swagger.
     [_Repositorio Github_](https://github.com/DarkaOnLine/L5-Swagger)
     [_Especificación del estándar_](https://swagger.io/specification/)
+
+-   **Geoapify:** api de geolocalización [_Sitio Oficial_](https://www.geoapify.com/) <br>
+
+-   **Leaflet Maps:** librería JS para mapas interactivos [_Sitio Oficial_](https://leafletjs.com/) <br>
 
 ---
 
