@@ -28,7 +28,7 @@
                 <td>{{ "$".number_format($compra->precio_total,2) }}</td>
                 <td>{{ count($compra->pedidos) }}</td>
                 <td>{{ $compra->forma_de_pago }}</td>
-                <td>{{ $compra->direccion_de_entrega }}</td>
+                <td>{{ str_replace("|", ", ", $compra->direccion_de_entrega) }}</td>
                 <td>{{ $compra->fecha_hora }}</td>
                 <td>{{ $compra->estado }}</td>
                 <td>
