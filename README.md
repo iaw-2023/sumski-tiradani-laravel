@@ -6,6 +6,26 @@ En este proyecto logramos implementar una aplicación web de ABM para manejar nu
 
 A su vez, presentamos una API REST para luego en el proyecto 3 poder armar una aplicación web que permita ver y comprar productos.
 
+### Promocion
+
+Para alcanzar la promoción se implementaron las siguientes funcionalidades adicionales
+
+-   **Login**: para implementar login se utilizó Auth0. <br>Los endpoints de la api de obtener compras de un cliente **/compras/{email}** y realizar compra **/comprar** fueron protegidos. <br> Para dar respuestas, primero toman un token del header de la request y lo validan con Auth0, si es correcto y está asociado al mismo email de la solicitud se pueden responder los datos.
+    <br> &nbsp;
+-   **Integración con MercadoPago**: se implementó un nuevo endpoint en nuestra API, el cuál toma un token con datos de pago envíado por el Brick del frontend. <br>
+    Se envía este token a validar a MercadoPago, antes comprobando su autenticidad y la del usuario, y en caso de ser correcta la información y poder hacerse el pago le envía al frontend con el código de pago, caso contrario, notifica que el pago no se pudo realizar
+    <br> &nbsp;
+-   **Administración de Archivos**: se implementó esta funcionalidad modelando las imágenes en la base de datos como un campo binario, en el cuál se almacenan los archivos obtenidos desde el input guardados en base64. <br>
+    Para mostrarlos tanto en backend como frontend, se crea un elemento img con <br>
+    <code> src = {data:image/png;base64,_stringb64_} </code>
+    <br> &nbsp;
+-   **Accesibilidad**: nada modificado en el backend
+-   **Servicio Web en JS**: nada modificado en el backend
+-   **Responsive en JS**: nada modificado en el backend
+    <br> &nbsp;
+
+    _Tambien hay anotaciones en el readme.md del frontend_
+
 ### Correcciones realizadas
 
 -   ❌ Inline Styling
@@ -15,8 +35,8 @@ A su vez, presentamos una API REST para luego en el proyecto 3 poder armar una a
 
 ### Links
 
--   [Deploy en Vercel](https://tucasaca-laravel-iamjuanpy.vercel.app/)
--   [Swagger UI](https://tucasaca-laravel-iamjuanpy.vercel.app/_api/documentation)
+-   [Deploy en Vercel](https://tucasaca-laravel.vercel.app/)
+-   [Swagger UI](https://tucasaca-laravel.vercel.app/_api/documentation)
 
 ### Aclaraciones pertinentes
 
